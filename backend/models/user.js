@@ -74,15 +74,18 @@ module.exports = (sequelize, Sequelize) => {
     
         // Column-8, default values for
         // dates => current time
-        myDate:     // à vérifier si utile rdx
+        createDate:     // à vérifier si utile rdx
         { 
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
         },
   
         // Timestamps
-        createDate: Sequelize.DATE, // à vérifier si utile rdx
-        updateDate: Sequelize.DATE  // à vérifier si utile rdx
+        updateDate:   // à vérifier si utile rdx
+        { 
+            type: Sequelize.DATE,
+            defaultValue: Sequelize.NOW 
+        },
     })
   
     // Exporting User, using this constant
