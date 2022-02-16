@@ -65,8 +65,14 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.BOOLEAN, 
             defaultValue: false 
         },
+
+        // Column-7, user picture
+        imageUrl: 
+        { 
+            type: Sequelize.STRING     //  l'URL de l'image de l'utilisateur
+        }, 
     
-        // Column-7, default values for
+        // Column-8, default values for
         // dates => current time
         myDate:     // à vérifier si utile rdx
         { 
