@@ -17,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
         // Column-1, user_id is an object with 
         // properties like type, keys, 
         // validation of column.
-        user_id:
+        u_id:
         {
     
             // Sequelize module has INTEGER Data_Type.
@@ -31,57 +31,64 @@ module.exports = (sequelize, Sequelize) => {
         },
   
         // Column-2, name
-        firstname: 
+        uFirstname: 
         { 
             type: Sequelize.STRING, 
             allowNull:false 
         },
     
         // Column-3, name
-        name: 
+        uName: 
         { 
             type: Sequelize.STRING, 
             allowNull:false 
         },
     
         // Column-4, email
-        email: 
+        uEmail: 
         { 
             type: Sequelize.STRING, 
             unique: true,
             allowNull:false 
         },
 
-        // Column-5, user admin 
-        isAdmin: 
+        // Column-5, password
+        uPassword: 
+        {
+            type: Sequelize.STRING,
+            required: true
+        },
+
+        // Column-6, user admin 
+        uIsadmin: 
         { 
             type: Sequelize.BOOLEAN, 
             defaultValue: false 
         },
 
-        // Column-6, is active 
-        isActive:  // à vérifier si utile rdx
+        // Column-7, is status active or not  
+        uDeleted:  // à vérifier si utile rdx
         { 
             type: Sequelize.BOOLEAN, 
             defaultValue: false 
         },
 
-        // Column-7, user picture
-        imageUrl: 
+        // Column-8, user picture
+        uImageUrl: 
         { 
             type: Sequelize.STRING     //  l'URL de l'image de l'utilisateur
         }, 
     
-        // Column-8, default values for
+        // Column-9, default values for
         // dates => current time
-        createDate:     // à vérifier si utile rdx
+        uCdate:     // à vérifier si utile rdx
         { 
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
         },
   
-        // Timestamps
-        updateDate:   // à vérifier si utile rdx
+        // Column-10, Timestamps
+        uUdate:   // à vérifier si utile rdx
         { 
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
