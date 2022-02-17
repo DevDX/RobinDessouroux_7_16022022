@@ -93,12 +93,30 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
         },
+
+        // to keep the same name in the DB. Here user. à vérifier rdx
+        freezeTableName: true
     })
   
+    //sequelize.sync({ alter: true })
+    /*
+    Cela vérifie quel est l'état actuel de la table dans la base de données (quelles colonnes elle contient, 
+    quels sont leurs types de données, etc.), 
+    puis effectue les modifications nécessaires dans la table pour la faire correspondre au modèle.
+    */
+
+    /*
+    User.hasMany(post, 
+        {
+            foreignKey: 'u_id',
+            onDelete:   'CASCADE',
+            onUpdate:   'CASCADE',
+        })*/
+
     // Exporting User, using this constant
     // we can perform CRUD operations on
     // 'user' table.
-    module.exports = User;  // à vérifier rdx
+    //module.exports = User;  // à vérifier rdx
     // ou 
-    //return User; à vérifier rdx
+    return User; //à vérifier rdx selon vidéo youtube 
 };

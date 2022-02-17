@@ -40,7 +40,13 @@ module.exports = (sequelize, Sequelize) => {
             { 
                 type: Sequelize.STRING, 
                 unique: true,
-                allowNull:false 
+                allowNull:false,
+                references: 
+                {
+                    model: 'user',
+                    key: 'u_id',
+                    onDelete: 'CASCADE'
+                } 
             },
     
             // Column-5, default values for

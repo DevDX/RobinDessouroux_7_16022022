@@ -25,7 +25,13 @@ module.exports = (sequelize, Sequelize) => {
             msgLink: 
             { 
                 type: Sequelize.INTEGER, 
-                allowNull:false 
+                allowNull:false, 
+                references: 
+                {
+                    model: 'post',
+                    key: 'post_id',
+                    onDelete: 'CASCADE'
+                } 
             },
         
             // Column-3, content
@@ -40,7 +46,13 @@ module.exports = (sequelize, Sequelize) => {
             { 
                 type: Sequelize.INTEGER, 
                 unique: true,
-                allowNull:false 
+                allowNull:false,
+                references: 
+                {
+                    model: 'user',
+                    key: 'u_id',
+                    onDelete: 'CASCADE'
+                } 
             },
     
             // Column-5, default values for
