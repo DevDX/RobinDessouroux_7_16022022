@@ -8,7 +8,8 @@ module.exports = (sequelize, Sequelize) => {
             // Column-1, post_id is an object with 
             // properties like type, keys, 
             // validation of column.
-            msg_id:
+            //msg_id:
+            id:
             {
         
                 // Sequelize module has INTEGER Data_Type.
@@ -16,7 +17,7 @@ module.exports = (sequelize, Sequelize) => {
                 // To increment user_id automatically.
                 autoIncrement:true,    
                 // user_id can not be null.
-                allowNull:false,    
+                //allowNull:false,    
                 // For uniquely identify user.
                 primaryKey:true
             },
@@ -26,12 +27,12 @@ module.exports = (sequelize, Sequelize) => {
             { 
                 type: Sequelize.INTEGER, 
                 allowNull:false, 
-                references: 
+                /*references: 
                 {
                     model: 'post',
                     key: 'post_id',
                     onDelete: 'CASCADE'
-                } 
+                } */
             },
         
             // Column-3, content
@@ -47,35 +48,35 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.INTEGER, 
                 unique: true,
                 allowNull:false,
-                references: 
+                /*references: 
                 {
                     model: 'user',
                     key: 'u_id',
                     onDelete: 'CASCADE'
-                } 
-            },
+                } */
+            }
     
             // Column-5, default values for
             // dates => current time
-            msgdate:     // à vérifier si utile rdx
+            /*msgdate:     // à vérifier si utile rdx
             { 
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW 
-            },
+            },*/
       
             // Column-6, Timestamps
-            msgUdate:   // à vérifier si utile rdx
+            /*msgUdate:   // à vérifier si utile rdx
             { 
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW 
-            },
+            },*/
             // vérifier si correct rdx
         })
       
         // Exporting User, using this constant
         // we can perform CRUD operations on
         // 'user' table.
-        module.exports = Message;  // à vérifier rdx
+        //module.exports = Message;  // à vérifier rdx
         // ou 
-        //return Message; à vérifier rdx
+        return Message; //  à vérifier rdx
     };

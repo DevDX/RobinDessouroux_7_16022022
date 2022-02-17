@@ -8,15 +8,15 @@ module.exports = (sequelize, Sequelize) => {
             // Column-1, post_id is an object with 
             // properties like type, keys, 
             // validation of column.
-            post_id:
-            {
-        
+            /*Post_id */
+            id:
+            {        
                 // Sequelize module has INTEGER Data_Type.
                 type:Sequelize.INTEGER,    
                 // To increment user_id automatically.
                 autoIncrement:true,    
                 // user_id can not be null.
-                allowNull:false,    
+                //allowNull:false,    
                 // For uniquely identify user.
                 primaryKey:true
             },
@@ -36,40 +36,40 @@ module.exports = (sequelize, Sequelize) => {
             },
         
             // Column-4, owner
-            postOwner: 
+            postOwner:                  // vérifier si  utile rdx  
             { 
                 type: Sequelize.STRING, 
                 unique: true,
                 allowNull:false,
-                references: 
+                /*references: 
                 {
                     model: 'user',
                     key: 'u_id',
                     onDelete: 'CASCADE'
-                } 
+                } */
             },
     
             // Column-5, default values for
             // dates => current time
-            postCdate:     // à vérifier si utile rdx
+            /*postCdate:     // à vérifier si utile rdx
             { 
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW 
-            },
+            },*/
       
             // Column-6, Timestamps
-            postUdate:   // à vérifier si utile rdx
+            /*postUdate:   // à vérifier si utile rdx
             { 
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW 
-            },
+            },*/
             // vérifier si correct rdx
         })
       
         // Exporting User, using this constant
         // we can perform CRUD operations on
         // 'user' table.
-        module.exports = Post;  // à vérifier rdx
+        //module.exports = Post;  // à vérifier rdx
         // ou 
-        //return Post; à vérifier rdx
+        return Post; // à vérifier rdx
     };

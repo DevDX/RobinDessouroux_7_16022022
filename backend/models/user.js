@@ -17,7 +17,8 @@ module.exports = (sequelize, Sequelize) => {
         // Column-1, user_id is an object with 
         // properties like type, keys, 
         // validation of column.
-        u_id:
+        //u_id:
+        id:
         {
     
             // Sequelize module has INTEGER Data_Type.
@@ -25,7 +26,7 @@ module.exports = (sequelize, Sequelize) => {
             // To increment user_id automatically.
             autoIncrement:true,    
             // user_id can not be null.
-            allowNull:false,    
+            //allowNull:false,    
             // For uniquely identify user.
             primaryKey:true
         },
@@ -81,18 +82,18 @@ module.exports = (sequelize, Sequelize) => {
     
         // Column-9, default values for
         // dates => current time
-        uCdate:     // à vérifier si utile rdx
+        /*uCdate:     // à vérifier si utile rdx
         { 
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
-        },
+        },*/
   
         // Column-10, Timestamps
-        uUdate:   // à vérifier si utile rdx
+        /*uUdate:   // à vérifier si utile rdx
         { 
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
-        },
+        },*/
 
         // to keep the same name in the DB. Here user. à vérifier rdx
         freezeTableName: true
