@@ -94,9 +94,11 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.DATE,
             defaultValue: Sequelize.NOW 
         },*/
-
+        
+        // timestamps auto
+        timestamps: true,
         // to keep the same name in the DB. Here user. à vérifier rdx
-        freezeTableName: true
+        freezeTableName: true        
     })
   
     //sequelize.sync({ alter: true }) // à vérifier rdx
@@ -109,7 +111,7 @@ module.exports = (sequelize, Sequelize) => {
     //sequelize.sync({force:true})
 
     // This creates the table if it doesn't exist (and does nothing if it already exists) http://sequelize.org/master/manual/model-basics.html
-    User.sync()
+    User.sync();
     
     /*
     User.hasMany(post, 
@@ -126,3 +128,5 @@ module.exports = (sequelize, Sequelize) => {
     // ou 
     return User; //à vérifier rdx selon vidéo youtube 
 };
+
+//export default user;

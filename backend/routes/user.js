@@ -6,4 +6,4 @@ const password  = require('../middleware/password');
 router.post('/signup', password, userCtrl.signup);    //  inscription
 router.post('/login', password, userCtrl.login);  //  connexion
 
-module.exports = router;
+module.exports = router;  

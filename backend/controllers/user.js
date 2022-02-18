@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 /* partie joi pour email */
-const Joi = require('joi');
+const Joi = require('joi'); 
 
 
 // version stackoverflow
@@ -60,4 +60,4 @@ exports.login = (req, res, next) => {
     })
     .catch(error => res.status(500).json({ error }));
 
-};
+}; 

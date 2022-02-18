@@ -1,4 +1,4 @@
-const Sauce = require('../models/Thing');
+const Sauce = require('../models/Thing'); // à adapter pour chaque model rdx
 const fs = require('fs');
 
 //console.log("ok passé ici sauce.js ligne 3");// test en dev

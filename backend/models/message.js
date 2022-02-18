@@ -54,7 +54,12 @@ module.exports = (sequelize, Sequelize) => {
                     key: 'u_id',
                     onDelete: 'CASCADE'
                 } */
-            }
+            },
+
+            // timestamps auto
+            timestamps: true,
+            // to keep the same name in the DB. Here user. à vérifier rdx
+            freezeTableName: true   
     
             // Column-5, default values for
             // dates => current time
@@ -74,7 +79,7 @@ module.exports = (sequelize, Sequelize) => {
         })
       
         // This creates the table if it doesn't exist (and does nothing if it already exists) http://sequelize.org/master/manual/model-basics.html
-        User.sync()
+        Message.sync();
         
         //module.exports = Message;  // à vérifier rdx
         // ou 
