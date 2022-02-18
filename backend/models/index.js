@@ -37,7 +37,4 @@ db.message.belongsTo(db.user);
 db.post.hasMany(db.message,{onDelete: "CASCADE", foreignKey: 'postid'}); // à vérifier si bonne syntaxe rdx
 db.message.belongsTo(db.post);
 
-
-
-
 module.exports = db;

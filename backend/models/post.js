@@ -66,9 +66,10 @@ module.exports = (sequelize, Sequelize) => {
             // vérifier si correct rdx
         })
       
-        // Exporting User, using this constant
-        // we can perform CRUD operations on
-        // 'user' table.
+        // This creates the table if it doesn't exist (and does nothing if it already exists) http://sequelize.org/master/manual/model-basics.html
+        User.sync()
+        
+        
         //module.exports = Post;  // à vérifier rdx
         // ou 
         return Post; // à vérifier rdx

@@ -99,13 +99,18 @@ module.exports = (sequelize, Sequelize) => {
         freezeTableName: true
     })
   
-    //sequelize.sync({ alter: true })
+    //sequelize.sync({ alter: true }) // à vérifier rdx
     /*
     Cela vérifie quel est l'état actuel de la table dans la base de données (quelles colonnes elle contient, 
     quels sont leurs types de données, etc.), 
     puis effectue les modifications nécessaires dans la table pour la faire correspondre au modèle.
     */
+    // crée la table à chaque fois à vérifier rdx
+    //sequelize.sync({force:true})
 
+    // This creates the table if it doesn't exist (and does nothing if it already exists) http://sequelize.org/master/manual/model-basics.html
+    User.sync()
+    
     /*
     User.hasMany(post, 
         {
