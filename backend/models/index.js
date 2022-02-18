@@ -28,13 +28,13 @@ db.message = require("./message.js")(sequelize, Sequelize);
 db.post = require("./comment.js")(sequelize, Sequelize);
 
 // vérifier si ce qui suit est juste rdx
-db.user.hasMany(db.post);
-db.user.hasMany(db.message);
+db.user.hasMany(db.post,{onDelete: "CASCADE", foreignKey: 'userid'}); // à vérifier si bonne syntaxe rdx
+db.user.hasMany(db.message,{onDelete: "CASCADE", foreignKey: 'userid'}); // à vérifier si bonne syntaxe rdx
 
 db.post.belongsTo(db.user);
 db.message.belongsTo(db.user);
 
-db.post.hasMany(db.message);
+db.post.hasMany(db.message,{onDelete: "CASCADE", foreignKey: 'postid'}); // à vérifier si bonne syntaxe rdx
 db.message.belongsTo(db.post);
 
 
