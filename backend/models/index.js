@@ -1,42 +1,43 @@
-/* https://askcodez.com/auto-generer-des-modeles-pour-sequelize.html */
+/* index.js selon https://www.bezkoder.com/node-js-express-sequelize-mysql/ */
+const dbConfig = require("../config/db.config.js");
 
-'use strict'; 
-const fs        = require("fs");
-const path      = require("path");
 const Sequelize = require("sequelize");
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, // dbConfig.port à vérifier si utile ou pas rdx
+    {
+        host: dbConfig.HOST,
+        dialect: dbConfig.dialect,
+        operatorsAliases: false,
 
-const sequelize = new Sequelize(process.env.DB_DATEBASE, process.env.DB_USER, process.env.DB_PASS, {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'mysql',
-    operatorsAliases: false
-});
+        pool:   
+        {
+            max: dbConfig.pool.max,
+            min: dbConfig.pool.min,
+            acquire: dbConfig.pool.acquire,
+            idle: dbConfig.pool.idle
+        }
+    });
 
 const db = {};
 
-fs
-  .readdirSync(__dirname)
-  .filter((file) => {
-    return (file.indexOf(".") !== 0) && (file !== "index.js") && (file !== "migrations") && (file !== "redshift-migrations");
-  })
-  .forEach((file) => {
-    const model = sequelize.import(path.join(__dirname, file));
-    db[model.name] = model;
-  });
-
-Object.keys(db).forEach((modelName) => {
-  if ("associate" in db[modelName]) {
-    db[modelName].associate(db);
-  }
-
-  db[modelName].sync().then(result => {
-    //some logic
-  }).catch(err => {
-    //some logic
-  })
-});
-
-db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+db.sequelize = sequelize;
+
+// selon le site db.tutorials = require("./tutorial.model.js")(sequelize, Sequelize);
+db.user = require("./user.js")(sequelize, Sequelize);
+db.message = require("./message.js")(sequelize, Sequelize);
+db.post = require("./comment.js")(sequelize, Sequelize);
+
+// vérifier si ce qui suit est juste rdx
+db.user.hasMany(db.post);
+db.user.hasMany(db.message);
+
+db.post.belongsTo(db.user);
+db.message.belongsTo(db.user);
+
+db.post.hasMany(db.message);
+db.message.belongsTo(db.post);
+
+
+
 
 module.exports = db;
