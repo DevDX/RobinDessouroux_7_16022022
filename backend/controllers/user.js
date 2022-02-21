@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); 
 
-const User = require('../models/User');
+const User = require('../models/user');
 
 /* partie joi pour email */
 const Joi = require('joi'); 

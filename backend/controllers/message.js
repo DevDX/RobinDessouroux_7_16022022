@@ -1,41 +1,40 @@
-//const Post = require('../models/Thing'); // à adapter pour chaque model rdx
-const Post = require('../models/post'); // à adapter pour chaque model rdx
+//const Message = require('../models/Thing'); // à adapter pour chaque model rdx
+const Message = require('../models/message'); // à adapter pour chaque model rdx
 const fs = require('fs');
+ 
 
 
-//console.log("ok passé ici post.js ligne 3");// test en dev
-
-exports.createPost  = (req, res, next) => { 
-  const postObject = JSON.parse(req.body.post);
+exports.createMessage  = (req, res, next) => { 
+  const messageObject = JSON.parse(req.body.message);
   //delete req.body._id;
-  delete postObject._id;
-  const post = new Post({
+  delete messageObject._id;
+  const message = new Message({
     //...req.body,
-	...postObject,
+	...messageObject,
     imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
   });
-  post.save()
+  message.save()
     .then(() => res.status(201).json({message: 'Objet enregistré !'})) 
     .catch(error => res.status(400).json({ error })); 
   // sequelize début
-  Post.create({
-      //postid serait créé automatiquement par l'auto incrément à vérifier rdx
+  Message.create({
+      //messageid serait créé automatiquement par l'auto incrément à vérifier rdx
       // req.params. ou req.body.  ?  à vérifier rdx
-      postTitle : req.body.title,           
-      postContent : req.body.content,
-      postOwner : req.body.userid,
-      postImageUrl : imageUrl  // déclaré en ligne 14 à vérifier rdx
+      messageTitle : req.body.title,           
+      messageContent : req.body.content,
+      messageOwner : req.body.userid,
+      messageImageUrl : imageUrl  // déclaré en ligne 14 à vérifier rdx
     })
     .then(() => res.status(201).json({message: 'Objet sequelize enregistré !'})) 
     .catch(error => res.status(400).json({ error })); 
     // sequelize sequelize fin   
 };
   
-exports.modifyPost = (req, res, next) => {
+exports.modifyMessage = (req, res, next) => {
   // cas particulier SI NOUVELLE IMAGE alors enlever la précédente - - - - -
   if (req.file) {
-    Post.findOne({ _id: req.params.id }).then((post) => {
-      const filename = post.imageUrl.split('/images/')[1];
+    Message.findOne({ _id: req.params.id }).then((message) => {
+      const filename = message.imageUrl.split('/images/')[1];
       fs.unlink(`images/${filename}`, (err) => {
         if (err) console.log(err);
         else {
@@ -45,24 +44,24 @@ exports.modifyPost = (req, res, next) => {
     });
   }
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-    const postObject = req.file ?
+    const messageObject = req.file ?
     {
-      ...JSON.parse(req.body.post),
+      ...JSON.parse(req.body.message),
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };  
 
-  // Post.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
-  Post.updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+  // Message.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
+  Message.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
     .then(() => res.status(200).json({ message: 'Objet modifié !'}))
     .catch(error => res.status(400).json({ error }));
   //  sequelize début
-  Post.update 
+  Message.update 
   (
     {
-      postTitle : req.body.title,           
-      postContent : req.body.content,
-      postOwner : req.body.userid,
-      postImageUrl : imageUrl
+      messageTitle : req.body.title,           
+      messageContent : req.body.content,
+      messageOwner : req.body.userid,
+      messageImageUrl : imageUrl
     },  
     {
       where: { _id: req.params.id }
@@ -75,16 +74,16 @@ exports.modifyPost = (req, res, next) => {
 
 
 
-exports.deletePost = (req, res, next) => {
-  Post.findOne({ _id: req.params.id })
-  .then(post => {
-    const filename = post.imageUrl.split('/images/')[1];
+exports.deleteMessage = (req, res, next) => {
+  Message.findOne({ _id: req.params.id })
+  .then(message => {
+    const filename = message.imageUrl.split('/images/')[1];
     fs.unlink(`images/${filename}`, () => {
-      Post.deleteOne({ _id: req.params.id })
+      Message.deleteOne({ _id: req.params.id })
       .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
       .catch(error => res.status(400).json({ error }));
       // sequelize début
-      Post.destroy({ where: { _id: req.params.id } })
+      Message.destroy({ where: { _id: req.params.id } })
       .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
       .catch(error => res.status(400).json({ error }));
       // sequelize fin
@@ -95,24 +94,24 @@ exports.deletePost = (req, res, next) => {
 
 
 
-exports.getOnePost = (req, res, next) => {
-      Post.findOne({ _id: req.params.id })
-        .then((post) => { res.status(200).json(post);})
+exports.getOneMessage = (req, res, next) => {
+      Message.findOne({ _id: req.params.id })
+        .then((message) => { res.status(200).json(message);})
         .catch((error) => { res.status(404).json({ error: error });});
        // sequelize début  
        /* selon https://www.tabnine.com/code/javascript/functions/sequelize/Model/findOne */
-       Post.findOne({ where: {_id: req.params.id } })   // à vérifier rdx
-        .then((post) => { res.status(200).json(post);})
+       Message.findOne({ where: {_id: req.params.id } })   // à vérifier rdx
+        .then((message) => { res.status(200).json(message);})
         .catch((error) => { res.status(404).json({ error: error });});
        // sequelize fin
 };
 
   
 
-exports.getAllPosts = (req, res, next) => {
-  Post.find()
-    .then((posts) => {
-      res.status(200).json(posts);
+exports.getAllMessages = (req, res, next) => {
+  Message.find()
+    .then((messages) => {
+      res.status(200).json(messages);
     })
     .catch((error) => {
       res.status(400).json({
@@ -121,9 +120,9 @@ exports.getAllPosts = (req, res, next) => {
     });
   // sequelize début
   /* selon https://www.tabnine.com/code/javascript/functions/sequelize/Model/findAll */
-  Post.findAll()  
-    .then((post) => {
-      res.status(200).json({post: 'Objets sequelize retrouvés !'}); 
+  Message.findAllMessages()  
+    .then((messages) => {
+      res.status(200).json({messages: 'Objets sequelize retrouvés !'}); 
     })
     .catch((error) => {
       res.status(400).json({
@@ -140,7 +139,7 @@ exports.likeDislike = (req, res, next) => {
 
     // case 1 pour like
     case 1:
-      Post.updateOne(
+      Message.updateOne(
         { _id: req.params.id },
         { $push: { usersLiked: req.body.userId }, // $push ajoute une valeur spécifiée à un tableau
           $inc: { likes: +1 } // $inc incrémente un champ d'une valeur spécifiée 
@@ -151,7 +150,7 @@ exports.likeDislike = (req, res, next) => {
 
     // case -1 pour dislike
     case -1:
-      Post.updateOne(
+      Message.updateOne(
         { _id: req.params.id },
         { $push: { usersDisliked: req.body.userId },  // $push ajoute une valeur spécifiée à un tableau
           $inc: { dislikes: +1 } // $inc incrémente un champ d'une valeur spécifiée 
@@ -164,10 +163,10 @@ exports.likeDislike = (req, res, next) => {
 
     // case 0 décrémentation du like ou du dislike
     case 0:
-      Post.findOne({ _id: req.params.id })
-        .then((post) => {
-          if (post.usersLiked.includes(req.body.userId)) { // ici l'utilisateur avait aimé 
-            Post.updateOne(
+      Message.findOne({ _id: req.params.id })
+        .then((message) => {
+          if (message.usersLiked.includes(req.body.userId)) { // ici l'utilisateur avait aimé 
+            Message.updateOne(
               { _id: req.params.id },
               { $pull: { usersLiked: req.body.userId }, // $push ajoute une valeur spécifiée à un tableau
                 $inc: { likes: -1 } // $inc incrémente un champ d'une valeur spécifiée
@@ -177,8 +176,8 @@ exports.likeDislike = (req, res, next) => {
               )
               .catch((error) => res.status(400).json({ error }));
           }
-          if (post.usersDisliked.includes(req.body.userId)) {  // ici l'utilisateur n'avait pas aimé 
-            Post.updateOne(
+          if (message.usersDisliked.includes(req.body.userId)) {  // ici l'utilisateur n'avait pas aimé 
+            Message.updateOne(
               { _id: req.params.id },
               {
                 $pull: { usersDisliked: req.body.userId },  // $push ajoute une valeur spécifiée à un tableau

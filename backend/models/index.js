@@ -8,6 +8,7 @@ const Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, // dbConfig.port à vérifier si utile ou pas rdx
     {
         host: dbConfig.HOST,
+        port: dbConfig.port,    // à vérifier rdx
         dialect: dbConfig.dialect,
         operatorsAliases: false,
 
@@ -20,7 +21,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, /
         }
     });
 
-    /* pas clair du tout pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
+    /* début pas clair du tout pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
     fs
         .readdirSync(__dirname)
         .filter(function(file) {
@@ -37,7 +38,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, /
         }
         });  
         
-    /* pas clair pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
+    /* fin pas clair pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
 
 const db = {};
 

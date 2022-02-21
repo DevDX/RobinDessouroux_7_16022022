@@ -4,6 +4,7 @@ module.exports = {
     PASSWORD: "",
     DB: "groupomaniadb",
     //port: 30000, à vérifier rdx
+    port: 30000,
     dialect: "mysql",
     pool: {
       max: 5,
