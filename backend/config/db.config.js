@@ -1,8 +1,13 @@
+require('dotenv').config();
+
 module.exports = {
     HOST: "localhost",
-    USER: "root",
-    PASSWORD: "",
-    DB: "groupomaniadb",
+    //USER: "root",
+    USER: process.env.DB_USER,
+    //PASSWORD: "",
+    PASSWORD: process.env.DB_PASS,
+    //DB: "groupomaniadb",
+    DB: process.env.DB_HOST,
     //port: 30000, à vérifier rdx
     port: 30000,
     dialect: "mysql",

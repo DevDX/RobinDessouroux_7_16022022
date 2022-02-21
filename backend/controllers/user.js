@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken'); 
-
 const User = require('../models/user');
+const fs = require('fs');
+
 
 /* partie joi pour email */
 const Joi = require('joi'); 
@@ -20,15 +21,36 @@ else {
       //console.log(value);
       //res.send("email ok selon stackoverflow");
       bcrypt.hash(req.body.password, 10)
-                        .then(hash => {
-                                        const user = new User({
-                                            email: req.body.email,
-                                            password: hash
-                                        });
+                        .then(hash => 
+                            {
+                                        const user = new User(
+                                            {
+                                                email: req.body.email,
+                                                password: hash
+                                            });
                                         user.save()
                                         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
                                         .catch(error => res.status(400).json({ error }));
-                                    })
+                                        // sequelize début 
+                                        User.create(
+                                            {
+                                                //usertid serait créé automatiquement par l'auto incrément à vérifier rdx
+                                                // req.params. ou req.body.  ?  à vérifier rdx
+                                                uFirstname : req.body.uFirstname,           // utile ?  à vérifier rdx
+                                                uName:  req.body.uName,
+                                                //uEmail: req.body.uEmail,
+                                                uEmail: req.body.email,
+                                                //uPassword: req.body.uPassword,
+                                                uPassword: hash,
+                                                uIsadmin: req.body.uIsadmin,
+                                                uDeleted: false,
+                                                imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ,
+                                                postImageUrl : imageUrl // à déclarer
+                                            })
+                                          .then(() => res.status(201).json({message: 'USER sequelize créé !'})) 
+                                          .catch(error => res.status(400).json({ error })); 
+                                        // sequelize fin
+                            })
                         .catch(error => res.status(500).json({ error }));      
     }
 };

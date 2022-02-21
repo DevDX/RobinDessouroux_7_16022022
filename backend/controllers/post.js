@@ -28,7 +28,7 @@ exports.createPost  = (req, res, next) => {
     })
     .then(() => res.status(201).json({message: 'Objet sequelize enregistré !'})) 
     .catch(error => res.status(400).json({ error })); 
-    // sequelize sequelize fin   
+  // sequelize sequelize fin   
 };
   
 exports.modifyPost = (req, res, next) => {
