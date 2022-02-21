@@ -56,6 +56,12 @@ module.exports = (sequelize, Sequelize) => {
                 } */
             },
 
+            // Column-5, message picture
+            messageImageUrl: 
+            { 
+                type: Sequelize.STRING     //  l'URL de l'image du message
+            }, 
+
             // timestamps auto
             timestamps: true,
             // to keep the same name in the DB. Here user. à vérifier rdx

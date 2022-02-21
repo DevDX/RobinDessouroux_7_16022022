@@ -103,7 +103,7 @@ exports.likeDislike = (req, res, next) => {
           $inc: { dislikes: +1 } // $inc incrémente un champ d'une valeur spécifiée 
         })
         .then(() => {
-          res.status(200).json({ message: 'dislike +1' })
+          res.status(200).json({ message: 'dislike +1' }) 
         })
         .catch((error) => res.status(400).json({ error }));
       break;

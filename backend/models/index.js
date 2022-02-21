@@ -20,7 +20,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, /
         }
     });
 
-    /* pas clair pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
+    /* pas clair du tout pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
     fs
         .readdirSync(__dirname)
         .filter(function(file) {

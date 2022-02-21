@@ -48,6 +48,12 @@ module.exports = (sequelize, Sequelize) => {
                     onDelete: 'CASCADE'
                 } */
             },
+
+            // Column-5, post picture
+            postImageUrl: 
+            { 
+                type: Sequelize.STRING     //  l'URL de l'image du post
+            }, 
             
             // timestamps auto
             timestamps: true,

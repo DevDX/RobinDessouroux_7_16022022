@@ -3,7 +3,7 @@ const multer = require('multer');
 const MIME_TYPES = {
   'image/jpg': 'jpg',
   'image/jpeg': 'jpg',
-  'image/png': 'png' 
+  'image/png': 'png' // à compléter ou pas ? rdx
 };
 
 const storage = multer.diskStorage({
