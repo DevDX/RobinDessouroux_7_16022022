@@ -115,5 +115,54 @@ exports.deleteUser = (req, res, next) => {
 // fin suppression utilisateur
 
 // début modification données utilisateur
+exports.modifyUser = (req, res, next) => {
+    // cas particulier SI NOUVELLE IMAGE alors enlever la précédente - - - - -
+    if (req.file) {
+      User.findOne({ _id: req.params.id }).then((user) => {
+        const filename = user.imageUrl.split('/images/')[1];
+        fs.unlink(`images/${filename}`, (err) => {
+          if (err) console.log(err);
+          else {
+            console.log('image précédente du User retirée ' + filename);
+          }
+        });
+      });
+    }
+    // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+      const userObject = req.file ?
+      {
+        ...JSON.parse(req.body.user),
+        imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      } : { ...req.body };  
+  
+    // User.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
+    User.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'User modifié !'}))
+      .catch(error => res.status(400).json({ error }));
+    //  sequelize début
+    User.update 
+    (
+        {
+            uFirstname : req.body.uFirstname,           // utile ?  à vérifier rdx
+            uName:  req.body.uName,
+            //uEmail: req.body.uEmail,
+            //uEmail: req.body.email,
+            //uPassword: req.body.uPassword,
+            //uPassword: hash,
+            uIsadmin: req.body.uIsadmin,
+            uDeleted: req.body.uDeleted,
+            //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ,
+            postImageUrl : imageUrl 
+        },  
+        {
+            where: { _id: req.params.id }
+        }
+    ) 
+    .then(() => res.status(200).json({ message: 'User sequelize modifié !'}))
+    .catch(error => res.status(400).json({ error }));   
+    //  sequelize fin 
+  };
+  
+  
 // fin modification données utilisateur
 
