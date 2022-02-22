@@ -1,9 +1,8 @@
 //const Message = require('../models/Thing'); // à adapter pour chaque model rdx
-const Message = require('../models/message'); // à adapter pour chaque model rdx
+const db = require("../models");
+const Message = db.message;
 const fs = require('fs');
  
-
-
 exports.createMessage  = (req, res, next) => { 
   const messageObject = JSON.parse(req.body.message);
   //delete req.body._id;
@@ -71,7 +70,6 @@ exports.modifyMessage = (req, res, next) => {
   .catch(error => res.status(400).json({ error }));   
   //  sequelize fin 
 };
-
 
 
 exports.deleteMessage = (req, res, next) => {
@@ -192,7 +190,6 @@ exports.likeDislike = (req, res, next) => {
         .catch((error) => res.status(404).json({ error }));
       break;
 
-    
 
     default:
       console.log(error); // vérifier si impératif, présent dans la doc mdn rdx

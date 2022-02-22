@@ -25,12 +25,15 @@ app.use((req, res, next) => {
   next();
 });
 
+const db = require('./models/index.js');
+db.sequelize.sync();  // création des tables
+
 app.use(express.json()); //équivalent à app.use(bodyParser.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-app.use('/api/messages', messageRoutes);
-app.use('/api/posts', postRoutes);
+app.use('/api/message', messageRoutes); 
+app.use('/api/post', postRoutes);  
 app.use('/api/auth', userRoutes);
 
 module.exports = app; 

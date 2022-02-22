@@ -1,7 +1,8 @@
 //const Post = require('../models/Thing'); // à adapter pour chaque model rdx
-const Post = require('../models/post'); // à adapter pour chaque model rdx
-const fs = require('fs');
 
+const fs = require('fs');
+const db = require("../models");
+const Post = db.post;
 
 //console.log("ok passé ici post.js ligne 3");// test en dev
 

@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
             // Column-1, post_id is an object with 
             // properties like type, keys, 
             // validation of column.
-            //msg_id:
+            //message_id:
             id:
             {
         
@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
             },
       
             // Column-2, link
-            msgLink: 
+            messageLink: 
             { 
                 type: Sequelize.INTEGER, 
                 allowNull:false, 
@@ -36,14 +36,14 @@ module.exports = (sequelize, Sequelize) => {
             },
         
             // Column-3, content
-            msgContent: 
+            messageContent: 
             { 
                 type: Sequelize.STRING, 
                 allowNull:false 
             },
         
             // Column-4, owner
-            msgOwner: 
+            messageOwner: 
             { 
                 type: Sequelize.INTEGER, 
                 unique: true,
@@ -62,32 +62,8 @@ module.exports = (sequelize, Sequelize) => {
                 type: Sequelize.STRING     //  l'URL de l'image du message
             }, 
 
-            // timestamps auto
-            timestamps: true,
-            // to keep the same name in the DB. Here user. à vérifier rdx
-            freezeTableName: true   
-    
-            // Column-5, default values for
-            // dates => current time
-            /*msgdate:     // à vérifier si utile rdx
-            { 
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW 
-            },*/
-      
-            // Column-6, Timestamps
-            /*msgUdate:   // à vérifier si utile rdx
-            { 
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW 
-            },*/
-            // vérifier si correct rdx
+           
         })
       
-        // This creates the table if it doesn't exist (and does nothing if it already exists) http://sequelize.org/master/manual/model-basics.html
-        Message.sync();
-        
-        //module.exports = Message;  // à vérifier rdx
-        // ou 
         return Message; //  à vérifier rdx
     };

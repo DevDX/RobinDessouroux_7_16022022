@@ -53,37 +53,14 @@ module.exports = (sequelize, Sequelize) => {
             postImageUrl: 
             { 
                 type: Sequelize.STRING     //  l'URL de l'image du post
-            }, 
+            } 
             
-            // timestamps auto
-            timestamps: true,
-            // to keep the same name in the DB. Here user. à vérifier rdx
-            freezeTableName: true     
-            // Column-5, default values for
-            // dates => current time
-            /*postCdate:     // à vérifier si utile rdx
-            { 
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW 
-            },*/
-      
-            // Column-6, Timestamps
-            /*postUdate:   // à vérifier si utile rdx
-            { 
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW 
-            },*/
-            // vérifier si correct rdx
+            
         });
 
         
-        // This creates the table if it doesn't exist (and does nothing if it already exists) http://sequelize.org/master/manual/model-basics.html
-        Post.sync();
-        
-        
-        //module.exports = Post;  // à vérifier rdx
-        // ou 
+    
         return Post; // à vérifier rdx
     };
 
-    //export default post;
+    
