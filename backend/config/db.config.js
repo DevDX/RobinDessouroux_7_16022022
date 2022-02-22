@@ -9,7 +9,7 @@ module.exports = {
     //DB: "groupomaniadb",
     DB: process.env.DB_HOST,
     //port: 30000, à vérifier rdx
-    port: 30000,
+    port: 3000,
     dialect: "mysql",
     pool: {
       max: 5,
