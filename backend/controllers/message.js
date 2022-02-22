@@ -82,11 +82,11 @@ exports.deleteMessage = (req, res, next) => {
       Message.deleteOne({ _id: req.params.id })
       .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
       .catch(error => res.status(400).json({ error }));
-      // sequelize début
+      // sequelize début suppression message
       Message.destroy({ where: { _id: req.params.id } })
       .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
       .catch(error => res.status(400).json({ error }));
-      // sequelize fin
+      // sequelize fin suppression message
       });
     })
   .catch(error => res.status(500).json({ error }));  

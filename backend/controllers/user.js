@@ -45,7 +45,7 @@ else {
                                                 uIsadmin: req.body.uIsadmin,
                                                 uDeleted: false,
                                                 imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ,
-                                                postImageUrl : imageUrl // à déclarer
+                                                postImageUrl : imageUrl 
                                             })
                                           .then(() => res.status(201).json({message: 'USER sequelize créé !'})) 
                                           .catch(error => res.status(400).json({ error })); 
@@ -83,3 +83,37 @@ exports.login = (req, res, next) => {
     .catch(error => res.status(500).json({ error }));
 
 }; 
+
+// début sequelize retrieve données utilisateur
+exports.getUser = (req, res,next) => 
+{
+    User.findOne({ where: { _id: req.params.id } }) // à vérifier rdx si suffisant, si la sélection des champs est implicite ou bien à ajouter 
+    .then((user) => res.status(200).json({user}) )   
+    .catch(error => res.status(404).json({ error: 'Utilisateur sequelize non trouvé' }))
+};
+// fin sequelize données utilisateur
+
+// début suppression utilisateur
+exports.deleteUser = (req, res, next) => {
+    User.findOne({ _id: req.params.id })
+    .then(user => 
+        {
+            const filename = user.imageUrl.split('/images/')[1];    // suppression de l'image si elle existe
+            fs.unlink(`images/${filename}`, () => {
+                User.deleteOne({ _id: req.params.id })
+                .then(() => res.status(200).json({ message: 'Image supprimée !'}))
+                .catch(error => res.status(400).json({ error }));
+                });
+            // début sequelize suppression utilisateur    
+            User.destroy({ where: { _id: req.params.id } })  
+            .then(() => res.status(200).json({ message: 'Utilisateur sequelize supprimé !'}))
+            .catch(error => res.status(400).json({ error }));  
+            // fin sequelize suppression utilisateur
+        })
+    .catch(error => res.status(500).json({ error }));  
+  };
+// fin suppression utilisateur
+
+// début modification données utilisateur
+// fin modification données utilisateur
+
