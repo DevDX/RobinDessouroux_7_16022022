@@ -19,7 +19,9 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, /
             acquire: dbConfig.pool.acquire,
             idle: dbConfig.pool.idle
         }
-    });
+    })
+    .then(() => console.log('Connexion à MySQL réussie !'))
+    .catch(() => console.log('Connexion à MySQL échouée !'));
 
     /* début pas clair du tout pour moi. Exemple de https://github.com/PierreGambarotto/tuto_sequelize/blob/master/lib/models/index.js */
     fs
