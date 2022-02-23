@@ -47,7 +47,8 @@ module.exports = (sequelize, Sequelize) => {
         uPassword: 
         {
             type: Sequelize.STRING,
-            required: true
+            required: true,
+            allowNull:false 
         },
 
         // Column-6, user admin 
