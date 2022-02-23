@@ -68,9 +68,13 @@ module.exports = (sequelize, Sequelize) => {
         uImageUrl: 
         { 
             type: Sequelize.STRING     //  l'URL de l'image de l'utilisateur
-        } 
+        }
     
-    })
+
+    },
+        // pour avoir le nom au singulier dans la DB
+        {freezeTableName: true }    // test rdx 23/02/2022
+    );
   
 
     

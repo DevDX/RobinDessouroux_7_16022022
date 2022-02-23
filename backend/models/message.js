@@ -60,10 +60,15 @@ module.exports = (sequelize, Sequelize) => {
             messageImageUrl: 
             { 
                 type: Sequelize.STRING     //  l'URL de l'image du message
-            }, 
+            }
 
            
-        })
+        },
+
+            // pour avoir le nom au singulier dans la DB
+            {freezeTableName: true }    // test rdx 23/02/2022
+
+        );
       
         return Message; //  à vérifier rdx
     };
