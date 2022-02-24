@@ -5,15 +5,23 @@ const db = require("../models");
 const Post = db.post;
 
 
-exports.createPost  = (req, res, next) => {   
+exports.createPost  = (req, res, next) => { 
+  const postObject = JSON.parse(req.body.post);
+  //delete req.body._id;
+  delete postObject._id;
+  const post = new Post({
+    //...req.body,
+	...postObject,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+  });
   // sequelize début
   Post.create({
+      //postid serait créé automatiquement par l'auto incrément à vérifier rdx
       // req.params. ou req.body.  ?  à vérifier rdx
       postTitle : req.body.postTitle,           
       postContent : req.body.postContent,
-      //inutile postOwner : req.body.postOwner, // userid ou req.body.postOwner à vérifier rdx
-      //postImageUrl :   `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  //  à vérifier rdx
-      postImageUrl : ""
+      //postOwner : req.body.postOwner, // userid ou req.body.postOwner à vérifier rdx
+      postImageUrl : imageUrl  // déclaré en ligne 16 à vérifier rdx
     })
     .then(() => res.status(201).json({message: 'Objet sequelize enregistré !'})) 
     .catch(error => res.status(400).json({ error })); 
@@ -46,15 +54,15 @@ exports.modifyPost = (req, res, next) => {
    {
       postTitle : req.body.postTitle,           
       postContent : req.body.postContent,
-      //postOwner : req.body.postOwner, // userid ou postOwner
+      postOwner : req.body.postOwner, // userid ou postOwner
       //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
       postImageUrl : req.body.postImageUrl,  // ou imageUrl
-      //createdAt : req.body.createdAt,
-      //updatedAt : req.body.updatedAt,
-      //userId : req.body.userId     
+      createdAt : req.body.createdAt,
+      updatedAt : req.body.updatedAt,
+      userId : req.body.userId     
     },  
     {
-      where: { id: req.params.id  } // à vérifier rdx  
+      where: { _id: req.params.id  } // à vérifier rdx  
       /*where: {
         id: req.params.id
       }*/
@@ -72,24 +80,19 @@ exports.modifyPost = (req, res, next) => {
 exports.deletePost = (req, res, next) => {
   Post.findOne({ _id: req.params.id })
   .then(post => {
-        if(post.imageUrl)
-        {
-            const filename = post.imageUrl.split('/images/')[1];
-            fs.unlink(`images/${filename}`, () => 
-            {
-                Post.destroy({ where: { id: req.params.id } }) // à vérifier rdx
-                .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
-                .catch(error => res.status(400).json({ error }));
-            });   
-        }
-        else
-        {
-            Post.destroy({ where: { id: req.params.id } }) // à vérifier rdx
-            .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
-            .catch(error => res.status(400).json({ error }));
-        }      
-   })
-  .catch(error => res.status(500).json({ error : "ligne 92 de controllers/post.js" }));   
+    const filename = post.imageUrl.split('/images/')[1];
+    fs.unlink(`images/${filename}`, () => {
+      /*Post.deleteOne({ _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+      .catch(error => res.status(400).json({ error }));*/
+      // sequelize début
+      Post.destroy({ where: { _id: req.params.id } }) // à vérifier rdx
+      .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
+      .catch(error => res.status(400).json({ error }));
+      // sequelize fin
+      });
+    })
+  .catch(error => res.status(500).json({ error }));  
 };
 
 
@@ -121,10 +124,9 @@ exports.getAllPosts = (req, res, next) => {
   // sequelize début
   /* selon https://www.tabnine.com/code/javascript/functions/sequelize/Model/findAll */
   Post.findAll({attributes: 
-    ['id',
-     `postTitle` ,
+    [`postTitle` ,
      `postContent` ,
-     //`postOwner` ,
+     `postOwner` ,
      `postImageUrl` ,
      `createdAt` ,
      `updatedAt`,

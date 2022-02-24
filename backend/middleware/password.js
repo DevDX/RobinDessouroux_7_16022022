@@ -15,8 +15,7 @@ passwordSchema
 
 
 module.exports = (req, res, next) => {
-    //console.log(req.body.password);
-    if(passwordSchema.validate(req.body.password)){
+    if(passwordSchema.validate(req.body.uPassword)){
         next();
     }else{
         return res
