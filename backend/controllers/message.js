@@ -46,7 +46,7 @@ exports.modifyMessage = (req, res, next) => {
   Message.update 
   (
    {
-      messageTitle : req.body.messageTitle,           
+      messageLink : req.body.messageLink,           
       messageContent : req.body.messageContent,
       //messageOwner : req.body.messageOwner, // userid ou messageOwner
       //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
