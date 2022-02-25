@@ -1,25 +1,32 @@
 //const Message = require('../models/Thing'); // à adapter pour chaque model rdx
-
-const fs = require('fs');
 const db = require("../models");
 const Message = db.message;
-
-exports.createMessage  = (req, res, next) => {   
+const fs = require('fs');
+ 
+exports.createMessage  = (req, res, next) => { 
+  const messageObject = JSON.parse(req.body.message);
+  //delete req.body._id;
+  delete messageObject._id;
+  const message = new Message({
+    //...req.body,
+	...messageObject,
+    imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  
+  });
+  message.save()
+    .then(() => res.status(201).json({message: 'Objet enregistré !'})) 
+    .catch(error => res.status(400).json({ error })); 
   // sequelize début
   Message.create({
+      //messageid serait créé automatiquement par l'auto incrément à vérifier rdx
       // req.params. ou req.body.  ?  à vérifier rdx
-      messageLink : req.body.messageLink,           
-      messageContent : req.body.messageContent,
-      messageOwner : req.body.messageOwner, // userid ou req.body.messageOwner à vérifier rdx
-      //messageOwner : "",
-      //messageImageUrl :   `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  //  à vérifier rdx
-      messageImageUrl : "",
-      postId : req.body.postId
-      
+      messageTitle : req.body.title,           
+      messageContent : req.body.content,
+      messageOwner : req.body.userid,
+      messageImageUrl : imageUrl  // déclaré en ligne 14 à vérifier rdx
     })
-    .then(() => res.status(201).json({message: 'Message sequelize enregistré !'})) 
-    .catch(error => res.status(400).json({ error: "erreur en ligne 21 controllers/message.js" })); 
-  // sequelize sequelize fin   
+    .then(() => res.status(201).json({message: 'Objet sequelize enregistré !'})) 
+    .catch(error => res.status(400).json({ error })); 
+    // sequelize sequelize fin   
 };
   
 exports.modifyMessage = (req, res, next) => {
@@ -42,26 +49,24 @@ exports.modifyMessage = (req, res, next) => {
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     } : { ...req.body };  
 
+  // Message.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
+  Message.updateOne({ _id: req.params.id }, { ...messageObject, _id: req.params.id })
+    .then(() => res.status(200).json({ message: 'Objet modifié !'}))
+    .catch(error => res.status(400).json({ error }));
   //  sequelize début
   Message.update 
   (
-   {
-      messageTitle : req.body.messageTitle,           
-      messageContent : req.body.messageContent,
-      //messageOwner : req.body.messageOwner, // userid ou messageOwner
-      //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-      messageImageUrl : req.body.messageImageUrl,  // ou imageUrl
-      //createdAt : req.body.createdAt,
-      //updatedAt : req.body.updatedAt,
-      //userId : req.body.userId     
+    {
+      messageTitle : req.body.title,           
+      messageContent : req.body.content,
+      messageOwner : req.body.userid,
+      messageImageUrl : imageUrl
     },  
     {
-      where: { id: req.params.id  } // à vérifier rdx  
-    } 
-    
+      where: { _id: req.params.id }
+    }
   ) 
-  .then(() => res.status(200).json({ message: 'Objet sequelize modifié !' }))
-  //.then(() => res.status(200).json({ message: req.params.id  }))
+  .then(() => res.status(200).json({ message: 'Objet sequelize modifié !'}))
   .catch(error => res.status(400).json({ error }));   
   //  sequelize fin 
 };
@@ -70,35 +75,30 @@ exports.modifyMessage = (req, res, next) => {
 exports.deleteMessage = (req, res, next) => {
   Message.findOne({ _id: req.params.id })
   .then(message => {
-        if(message.imageUrl)
-        {
-            const filename = message.imageUrl.split('/images/')[1];
-            fs.unlink(`images/${filename}`, () => 
-            {
-                Message.destroy({ where: { id: req.params.id } }) // à vérifier rdx
-                .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
-                .catch(error => res.status(400).json({ error }));
-            });   
-        }
-        else
-        {
-            Message.destroy({ where: { id: req.params.id } }) // à vérifier rdx
-            .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
-            .catch(error => res.status(400).json({ error }));
-        }      
-   })
-  .catch(error => res.status(500).json({ error : "ligne 87 de controllers/message.js" }));   
+    const filename = message.imageUrl.split('/images/')[1];
+    fs.unlink(`images/${filename}`, () => {
+      Message.deleteOne({ _id: req.params.id })
+      .then(() => res.status(200).json({ message: 'Objet supprimé !'}))
+      .catch(error => res.status(400).json({ error }));
+      // sequelize début suppression message
+      Message.destroy({ where: { _id: req.params.id } })
+      .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
+      .catch(error => res.status(400).json({ error }));
+      // sequelize fin suppression message
+      });
+    })
+  .catch(error => res.status(500).json({ error }));  
 };
 
 
 
 exports.getOneMessage = (req, res, next) => {
-      /*Message.findOne({ _id: req.params.id })
+      Message.findOne({ _id: req.params.id })
         .then((message) => { res.status(200).json(message);})
-        .catch((error) => { res.status(404).json({ error: error });});*/
+        .catch((error) => { res.status(404).json({ error: error });});
        // sequelize début  
        /* selon https://www.tabnine.com/code/javascript/functions/sequelize/Model/findOne */
-       Message.findByPk( req.params.id  )   // find by personnal key 
+       Message.findOne({ where: {_id: req.params.id } })   // à vérifier rdx
         .then((message) => { res.status(200).json(message);})
         .catch((error) => { res.status(404).json({ error: error });});
        // sequelize fin
@@ -107,7 +107,7 @@ exports.getOneMessage = (req, res, next) => {
   
 
 exports.getAllMessages = (req, res, next) => {
-  /*Message.find()
+  Message.find()
     .then((messages) => {
       res.status(200).json(messages);
     })
@@ -115,22 +115,12 @@ exports.getAllMessages = (req, res, next) => {
       res.status(400).json({
         error: error
       });
-    });*/
+    });
   // sequelize début
   /* selon https://www.tabnine.com/code/javascript/functions/sequelize/Model/findAll */
-  Message.findAll({attributes: 
-    ['id',
-     `messageLink` ,
-     `messageContent` ,
-     `messageOwner` ,
-     `messageImageUrl` ,
-     `createdAt` ,
-     `updatedAt`,
-     `postId` 
-   ],})  
+  Message.findAllMessages()  
     .then((messages) => {
-      // test rdx 24/02/2022 res.status(200).json({messages: 'Objets sequelize retrouvés !'}); 
-      res.status(200).json({messages: messages}); // test 24/02/2022 rdx
+      res.status(200).json({messages: 'Objets sequelize retrouvés !'}); 
     })
     .catch((error) => {
       res.status(400).json({
@@ -140,8 +130,6 @@ exports.getAllMessages = (req, res, next) => {
   // sequelize fin    
 };
 
-
-/* Attention, pas utilisé pour l'instant !!! rdx */
 // cas des likes et dislikes
 exports.likeDislike = (req, res, next) => { 
   
@@ -202,7 +190,6 @@ exports.likeDislike = (req, res, next) => {
         .catch((error) => res.status(404).json({ error }));
       break;
 
-    
 
     default:
       console.log(error); // vérifier si impératif, présent dans la doc mdn rdx

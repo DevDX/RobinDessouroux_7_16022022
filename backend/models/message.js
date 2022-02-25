@@ -46,8 +46,8 @@ module.exports = (sequelize, Sequelize) => {
             messageOwner: 
             { 
                 type: Sequelize.INTEGER, 
-                unique: true,
-                allowNull:false,
+                //unique: true,
+                //allowNull:false,
                 /*references: 
                 {
                     model: 'user',
