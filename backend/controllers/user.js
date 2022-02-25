@@ -150,9 +150,9 @@ exports.modifyUser = (req, res, next) => {
       } : { ...req.body };  
   
     // User.updateOne({ _id: req.params.id }, { ...thingObject, _id: req.params.id })
-    User.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id })
+    /*User.updateOne({ _id: req.params.id }, { ...userObject, _id: req.params.id })
       .then(() => res.status(200).json({ message: 'User modifié !'}))
-      .catch(error => res.status(400).json({ error }));
+      .catch(error => res.status(400).json({ error }));*/
     //  sequelize début
     User.update 
     (
@@ -166,10 +166,10 @@ exports.modifyUser = (req, res, next) => {
             uIsadmin: req.body.uIsadmin,
             uDeleted: req.body.uDeleted,
             //imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` ,
-            postImageUrl : imageUrl 
+            //postImageUrl : imageUrl  à ajouter après rdx  25/02/2022
         },  
         {
-            where: { _id: req.params.id }
+            where: { id: req.params.id }
         }
     ) 
     .then(() => res.status(200).json({ message: 'User sequelize modifié !'}))
