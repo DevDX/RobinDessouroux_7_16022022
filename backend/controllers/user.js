@@ -3,11 +3,38 @@ const jwt = require('jsonwebtoken');
 const db = require("../models");
 const User = db.user;
 const fs = require('fs');
+ 
+//const Post = db.post;   // test rdx 26/02/2022
 
+//let idAdmin = 0; // variable de W id de l'admin 27/02/2022  à vérifier rdx
 
 /* partie joi pour email */
 const Joi = require('joi'); 
 
+/* début test qui est Admin 27/02/2022 rdx */
+/*exports.getAdmin = (req,res,next) => {
+    User.findOne({ uIsadmin: 1 })    
+        .then(user => {
+            if(!user) {
+                return res.status(401).json({ error : 'ADMIN sequelize non trouvé !' });
+            }
+            else
+            {
+                //idAdmin = user.id;
+                idAdmin = ('id', { where: { uIsadmin:  1 }  }); // Quel est l'Admin ?
+            }
+            console.log(user.id);
+            console.log(user.uIsadmin);
+            //console.log(req.body.uPassword);
+            console.log(user.uPassword);
+            bcrypt.compare(req.body.uPassword, user.uPassword)
+            
+            .catch(error => res.status(500).json({ error }));
+        })
+    }*/  
+    
+ //   console.log("idAdmin : " + idAdmin);     
+/*  fin test qui est Admin 27/02/2022 rdx                                 */
 
 // version stackoverflow
 exports.signup = (req, res, next) => {
@@ -117,13 +144,49 @@ exports.deleteUser = (req, res, next) => {
               });   
           }
           else
+          /*
+          // début test rdx 26/02/2022
+          {
+            User.beforeBulkDestroy(({where, individualHooks}) => {
+                        // début update table post
+                        Post.update 
+                        (
+                            {
+                                userId : 0     // à vérifier rdx
+                            },  
+                            {
+                                where: { userId: req.params.id   } // à vérifier rdx  
+                            }                             
+                        ) 
+                        // fin update table post 
+          })
+        }
+                                   
+                     
+          // fin test rdx 26/02/2022
+          */
+         
           {
               User.destroy({ where: { id: req.params.id } }) // à vérifier rdx
-              .then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
+              //.then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
+              .then(() => res.status(200).json({ message: 'User sequelize supprimé !'}))
+              //.then( console.log("User sequelize id "+ req.params.id + " supprimé. Vérifiez la table post, champ userId !")) 
               .catch(error => res.status(400).json({ error }));
-          }      
+          } 
+
+          /*{
+              //Post.update({ userId : 3 } , {where: { userId : null  } }) // à vérifier rdx    
+              //idAdmin = ('id', { where: { uIsadmin:  1 }  }); // Quel est l'Admin ?
+              console.log("idAdmin : " + idAdmin);    
+              Post.update({ userId : idAdmin } , {where: { userId : null  } }) // à vérifier rdx      27/02/2022 
+              .then( console.log("Table post sequelize contenant userId = "+ req.params.id + " a été updatée. Vérifiez la table post ! ")) 
+              //.catch(error => res.status(400).json({ error }));
+              .catch(err =>  console.log("update non fait " +err));  
+          }*/      
      })
-    .catch(error => res.status(500).json({ error : "ligne 126 de controllers/user.js" }));   
+    //.catch(error => res.status(500).json({ error : "ligne 126 de controllers/user.js" }));   
+    //.catch(error => {console.log("erreur 500 ligne 160 controllers/user.js :" + error +" "+req.params.id ) });   
+    .catch(err => {console.log(err) });  
   };
   
 // fin suppression utilisateur

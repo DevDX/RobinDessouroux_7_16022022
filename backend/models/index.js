@@ -32,6 +32,9 @@ db.post = require("./post.js")(sequelize, Sequelize);
 
 db.post.belongsTo(db.user);
 db.user.hasMany(db.post);  
+// début test 26/02/2022 rdx 
+//db.user.hasMany(db.post,{ onDelete: "CASCADE", hooks: true });  
+// fin test 26/02/2022 rdx
 
 db.message.belongsTo(db.post,{onDelete:"CASCADE"});
 db.post.hasMany(db.message);  
