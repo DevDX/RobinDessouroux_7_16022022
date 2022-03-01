@@ -6,34 +6,36 @@
         <title>Groupomania réseau social interne</title> 
         <link rel="shortcut icon" href="../image/icon.svg"/>
     </head>
-    <div class="home">
+    <body>
+        <div class="home">
+            
+            <header> 
+                <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+                <!--h1>Bienvenue sur le réseau social d'entreprise de Groupomania.</h1>
+                <h2>Rejoignez notre Communauté.</h2-->
+            </header>
+            
+            <!--h1>  Bienvenue sur le réseau social d'entreprise de Groupomania. </h1-->
+            <!--h2>Rejoignez notre Communauté.</h2-->
         
-        <div id="header"> 
-            <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
-            <!--h1>Bienvenue sur le réseau social d'entreprise de Groupomania.</h1>
-            <h2>Rejoignez notre Communauté.</h2-->
-        </div>
-        
-        <!--h1>  Bienvenue sur le réseau social d'entreprise de Groupomania. </h1-->
-        <!--h2>Rejoignez notre Communauté.</h2-->
-    
-        
-        <section id="choice">
-            <h1>Bienvenue sur le réseau social d'entreprise de Groupomania</h1>
-            <h2>Rejoignez notre Communauté</h2>
-            <nav> 
-                <ul>
-                <li>
-                    <router-link class="link" to="/signup" ><p>Inscription</p></router-link >
-                </li>
-                <li>
-                    <router-link class="link" to="/login"><p>Connexion</p></router-link>
-                </li>
-                </ul>
-            </nav>
-        </section>
-        
-    </div>    
+            
+            <section id="choice">
+                <h1>Bienvenue sur le réseau social d'entreprise de Groupomania</h1>
+                    <h2>Rejoignez notre Communauté</h2>
+                    <nav> 
+                        <ul>
+                        <li>
+                            <router-link class="link" to="/signup" ><p>Inscription</p></router-link >
+                        </li>
+                        <li>
+                            <router-link class="link" to="/login"><p>Connexion</p></router-link>
+                        </li>
+                        </ul>
+                    </nav>
+            </section>
+            
+        </div>  
+    </body>  
 </template>
 
 
@@ -51,7 +53,7 @@ body
 {
     display: inline;
 }
-#header 
+header 
 {
     display: flex;
     flex-direction: row;

@@ -1,60 +1,70 @@
 <template>
-    <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>Groupomania réseau social interne</title> 
-        <link rel="shortcut icon" href="../image/icon.svg"/>
-    </head>
-    <body>
-        <div class="login">
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+	<title>Groupomania réseau social interne</title> 
+    <link rel="shortcut icon" href="../image/icon.svg"/>
+</head>
+<body>
+    <div class="signup">
 
-            <header> 
-                <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
-                <!--h1>Bienvenue sur le réseau social d'entreprise de Groupomania.</h1>
-                <h2>Rejoignez notre Communauté.</h2-->
-            </header>
+        <header> 
+            <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+        </header>
 
-            <!--h1>  Bienvenue sur le réseau social d'entreprise de Groupomania. </h1-->
-            <!--h2>Rejoignez notre Communauté.</h2-->
+        <section id="choice">
+            <h1>Inscription au réseau social d'entreprise de Groupomania</h1>
 
-
-
-            <section id="choice">
-                <h1>Connexion au réseau social d'entreprise de Groupomania</h1>
-                <!--h2>Connexion</h2-->
-
-                <section id="login-form">
-                    <form id="form_1"> 
-                        <fieldset class="FlexElt">
-                            <legend>Connexion</legend> 
-
-                            <label for="email">Email :</label>
-                            <input class="FlexElt" type="email" name="email" required placeholder="Saisissez votre email" id="email" /> 
-                            <br><br><br>		
-                            <label for="password">Mot de passe :</label>
-                            <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" /> 
-                            <br><br><br>		
-
-                            <button class="group-button" type="submit">Connexion</button>
-                        </fieldset>
-                    </form>
-                </section>
-
-                <nav> 
-                    <ul>
-                    <li>
-                        <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
-                    </li>
-                    </ul>
-                </nav>
+            <section id="signup-form">
+                <form id="form_1"> 
+                    <fieldset class="FlexElt">
+                        <legend>Inscription</legend> 
+                        <legend>Informations personnelles</legend>
+									
+                        <div class="container">
+                            <label for="user-profil">Profil :</label>
+                            <select name="user-profil" id="user-profil">
+                            <option value="">--SVP, sélectionnez votre profil</option>
+                            <option value="user">Utilisateur</option>
+                            <option value="admin">Administrateur</option>  
+                            </select>
+                        </div>
+                        <br> 
+                        
+                        <label for="nom">Nom :</label> <input class="FlexElt" type="text" name="nom" required placeholder="Saisissez votre nom" id="nom" aria-label="Saisissez-votre nom"/>   
+                        <br> 	
+                        <label for="prenom">Prénom :</label> <input class="FlexElt" type="text" name="prenom" required placeholder="Saisissez votre prénom" id="prenom" aria-label="Saisissez-votre prénom"/>   
+                        <br> 					
+                        <label for="email">Email :</label>
+                        <input class="FlexElt" type="email" name="email" required placeholder="Saisissez votre email" id="email" /> 
+                        <br> 	
+                        <label for="password">Mot de passe :</label>
+                        <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" /> 
+                        <br>                      
+                        
+                        
+                        <button class="group-button" type="submit">Inscription</button>
+                    </fieldset>
+                </form>
             </section>
 
-        </div>
-    </body>       
+            <nav> 
+                <ul>
+                  <li>
+                    <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
+                  </li>
+                </ul>
+            </nav>
+        </section>
+
+    </div>
+</body>        
 </template>
 
 <script>
+
 </script>
+
 
 <style>
 *
@@ -164,7 +174,7 @@ ul
 .FlexElt
 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     /*gap:20px;*/
     min-width: 125px;
@@ -178,7 +188,7 @@ ul
     /*rdx couleur noire*/
     color:#000000;font-weight: bold;font-size: 18px; 
     /*background-color: #ffb233;*/background-color: #ffffff;
-    justify-content: center;
+    justify-content: center; align-items: center;
 }
 .group-button
 {
@@ -192,6 +202,7 @@ ul
     border: 1px solid #000000;
     font-size: 20px; 
     box-shadow: 0 0 4px black;
+    margin-top:15px;
 }
 .group-button:hover
 {
@@ -207,5 +218,22 @@ legend
     border-bottom-left-radius: 5px;  
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;      
+}
+select
+{
+    font-size: 14px;
+	border-radius: 20px;
+	border: 1px solid #000000;
+	text-align: center;
+	text-align-last: center;        
+}
+.container
+{
+    display: flex;flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*border: 1px solid #000000;*/
+    margin: 15px auto;
 }
 </style>
