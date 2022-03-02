@@ -1,5 +1,5 @@
 <template>
-    <html lang="fr">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>Groupomania réseau social interne</title> 
@@ -16,8 +16,6 @@
 
             <!--h1>  Bienvenue sur le réseau social d'entreprise de Groupomania. </h1-->
             <!--h2>Rejoignez notre Communauté.</h2-->
-
-
 
             <section id="choice">
                 <h1>Connexion au réseau social d'entreprise de Groupomania</h1>
@@ -50,7 +48,8 @@
             </section>
 
         </div>
-    </body>       
+    </body> 
+</html>      
 </template>
 
 <script>

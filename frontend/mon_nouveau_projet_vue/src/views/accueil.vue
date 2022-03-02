@@ -1,6 +1,6 @@
 <template>
-    <!--DOCTYPE html-->
-    <html lang="fr">
+<!--DOCTYPE html-->
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>Groupomania réseau social interne</title> 
@@ -35,7 +35,8 @@
             </section>
             
         </div>  
-    </body>  
+    </body> 
+</html> 
 </template>
 
 
