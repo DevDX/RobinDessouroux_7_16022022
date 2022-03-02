@@ -9,7 +9,7 @@ router.post('/', auth, multer, messageCtrl.createMessage);  //  création
 //router.post('/',  multer, messageCtrl.createMessage);  //  création 
 router.put('/:id', auth, multer, messageCtrl.modifyMessage);    //  modification
 router.get('/:id', auth, messageCtrl.getOneMessage);    //  afficher un message
-router.get('/', auth, messageCtrl.getAllMessages);  // afficher toutes les messages
+router.get('/', auth, messageCtrl.getAllMessages);  // afficher tous les messages
 router.delete('/:id', auth, messageCtrl.deleteMessage); // suppression 
 
 router.post('/:id/like', auth, messageCtrl.likeDislike);   //cas des likes et dislikes à conserver ou pas ? rdx
