@@ -10,16 +10,10 @@
 
             <header> 
                 <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
-                <!--h1>Bienvenue sur le réseau social d'entreprise de Groupomania.</h1>
-                <h2>Rejoignez notre Communauté.</h2-->
             </header>
-
-            <!--h1>  Bienvenue sur le réseau social d'entreprise de Groupomania. </h1-->
-            <!--h2>Rejoignez notre Communauté.</h2-->
 
             <section id="choice">
                 <h1>Connexion au réseau social d'entreprise de Groupomania</h1>
-                <!--h2>Connexion</h2-->
 
                 <section id="login-form">
                     <form id="form_1"> 
@@ -48,12 +42,44 @@
             </section>
 
         </div>
-    </body> 
-</html>      
+    </body>
+</html>        
 </template>
 
 <script>
+import axios from "axios";
+
+export default 
+{
+    name: "Login",
+    //Récupération du data grâce au v-model DEMANDER à Denis
+    data() 
+    {
+        return {email: "",password: ""};
+    },
+    // utilisation d'axios pour envoi des données 
+    methods: 
+    {
+        login() 
+        {
+            axios
+            .post("http://localhost:3000/api/auth/login", { email: this.email, password: this.password })   // semblable à Postman 
+            // Création et enregistrement des données dans localStorage 
+            // et affichage des articles de la table post
+            .then((res) => 
+            {
+                localStorage.setItem("groupomania-user", JSON.stringify(res.data));
+                this.$router.push("post");
+            })
+            .catch((error) => 
+            {
+                console.log(error);
+            });
+        },
+    },
+};
 </script>
+
 
 <style>
 *
@@ -123,7 +149,7 @@ h2
 } 
 ul
 {
-        padding:0;
+    padding:0;
 }
 .link 
 {    

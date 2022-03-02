@@ -1,5 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router' // à vérifier avec Denis
+//import HomeView from '../views/HomeView.vue' // à vérifier avec Denis plutôt AccueilView.vue ?
+import HomeView from '../views/AccueilView.vue' // ou nom indispensable Home ? Dans ce cas renommer.  
 
 const routes = [
   {
@@ -8,17 +9,19 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    path: '/connexion',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
+  },
+  {
+    path: '/articles',
+    name: 'AllPosts',
+    component: () => import('../views/PostView.vue')
+  },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(process.env.BASE_URL),  // à vérifier avec Denis 
   routes
 })
 
