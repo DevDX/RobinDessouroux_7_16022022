@@ -2,5 +2,8 @@
   "dependencies": {
     "axios": "^0.26.0",
     "vue-axios": "^3.4.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-router": "~5.0.0"
   }
 }
