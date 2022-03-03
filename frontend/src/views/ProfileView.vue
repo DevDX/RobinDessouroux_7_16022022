@@ -40,11 +40,7 @@
                             <br> 					
                             <label for="email">Email :</label>
                             <input  type="email" name="email"  id="email" readonly size = 30/> 
-                            <br> 	
-                            <!--label for="password">Mot de passe :</label>
-                            <input  type="password" name="password"  id="password" readonly /> 
-                            <br-->                      
-                            
+                            <br> 	                            
                             
                             <!--button id="validation "class="group-button" type="submit">Validation</button-->
                             <button id="deletion" class="group-button" type="submit">Suppression</button>
@@ -75,7 +71,7 @@ export default
     //Récupération du data grâce au v-model DEMANDER à Denis
     data() 
     {
-        return {email: "",password: "", nom: "", prenom: "", profil: "", id: ""};
+        return {email: "", nom: "", prenom: "", profil: "", id: ""};
     },
     // utilisation d'axios pour envoi des données 
     methods: 
@@ -83,7 +79,7 @@ export default
         profile() 
         {
             axios
-            .put("http://localhost:3000/api/auth/{this.id}", { uEmail: this.email, uPassword: this.password, uName: this.nom, uFirstname: this.prenom , uIsadmin: this.profil })   // semblable à Postman 
+            .put("http://localhost:3000/api/auth/{this.id}", { uEmail: this.email, uName: this.nom, uFirstname: this.prenom , uIsadmin: this.profil })   // semblable à Postman 
             // Création et enregistrement des données dans localStorage 
             // et affichage des articles de la table post
             .then((res) => 
