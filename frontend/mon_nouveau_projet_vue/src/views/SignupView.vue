@@ -63,7 +63,37 @@
 </template>
 
 <script>
+import axios from "axios";
 
+export default 
+{
+    name: "Signup",
+    //Récupération du data grâce au v-model DEMANDER à Denis
+    data() 
+    {
+        return {email: "",password: "", nom: "", prenom: ""};
+    },
+    // utilisation d'axios pour envoi des données 
+    methods: 
+    {
+        signup() 
+        {
+            axios
+            .post("http://localhost:3000/api/auth/signup", { uEmail: this.email, uPassword: this.password, uName: this.nom, uFirstname: this.prenom })   // semblable à Postman 
+            // Création et enregistrement des données dans localStorage 
+            // et affichage des articles de la table post
+            .then((res) => 
+            {
+                localStorage.setItem("groupomania-user", JSON.stringify(res.data));
+                this.$router.push("post");
+            })
+            .catch((error) => 
+            {
+                console.log(error);
+            });
+        },
+    },
+};
 </script>
 
 

@@ -63,7 +63,7 @@ export default
         login() 
         {
             axios
-            .post("http://localhost:3000/api/auth/login", { email: this.email, password: this.password })   // semblable à Postman 
+            .post("http://localhost:3000/api/auth/login", { uEmail: this.email, uPassword: this.password })   // semblable à Postman 
             // Création et enregistrement des données dans localStorage 
             // et affichage des articles de la table post
             .then((res) => 
