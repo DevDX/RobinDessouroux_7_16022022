@@ -14,15 +14,20 @@ const routes = [
     component: () => import('../views/SignupView.vue')
   },
   {
-    path: '/connexion',
-    name: 'Login',
-    component: () => import('../views/LoginView.vue')
-  },
-  {
     path: '/articles',
     name: 'AllPosts',
     component: () => import('../views/PostView.vue')
   },
+  {
+    path: '/connexion',
+    name: 'Login',
+    component: () => import('../views/LoginView.vue')
+  },
+  { // w en cours
+    path: '/profil',
+    name: 'Profile',
+    component: () => import('../views/ProfileView.vue')
+  }
 ]
 
 const router = createRouter({
