@@ -1,4 +1,5 @@
 <template>
+<!--DOCTYPE html-->
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -22,28 +23,30 @@
                             <legend>Informations personnelles</legend>
                                         
                             <div class="container">
-                                <label for="profil">Statut :</label>
-                                <select name="profil" id="profil">
-                                <option value="">--SVP, sélectionnez votre profil</option>
+                                <label for="userid">Table user id : {{ id }}</label>
+                                <!--select name="profil" id="profil"-->
+                                <label for="profil" v-if="uIsadmin === true">Administrateur</label>
+                                <label for="profil" v-else>Utilisateur</label>
+                                <!--option value="">--SVP, sélectionnez votre profil</option>
                                 <option value="user">Utilisateur</option>
                                 <option value="admin">Administrateur</option>  
-                                </select>
+                                </select-->
                             </div>
                             <br> 
                             
-                            <label for="nom">Nom :</label> <input class="FlexElt" type="text" name="nom" required placeholder="Saisissez votre nom" id="nom" aria-label="Saisissez-votre nom"/>   
+                            <label for="nom">Nom :</label> <input  type="text" name="nom" id="nom" readonly  size = 30/>   
                             <br> 	
-                            <label for="prenom">Prénom :</label> <input class="FlexElt" type="text" name="prenom" required placeholder="Saisissez votre prénom" id="prenom" aria-label="Saisissez-votre prénom"/>   
+                            <label for="prenom">Prénom :</label> <input  type="text" name="prenom"  id="prenom" readonly size = 30/>   
                             <br> 					
                             <label for="email">Email :</label>
-                            <input class="FlexElt" type="email" name="email" required placeholder="Saisissez votre email" id="email" /> 
+                            <input  type="email" name="email"  id="email" readonly size = 30/> 
                             <br> 	
-                            <label for="password">Mot de passe :</label>
-                            <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" /> 
-                            <br>                      
+                            <!--label for="password">Mot de passe :</label>
+                            <input  type="password" name="password"  id="password" readonly /> 
+                            <br-->                      
                             
                             
-                            <button id="validation" class="group-button" type="submit">Validation</button>
+                            <!--button id="validation "class="group-button" type="submit">Validation</button-->
                             <button id="deletion" class="group-button" type="submit">Suppression</button>
                         </fieldset>
                     </form>
@@ -72,7 +75,7 @@ export default
     //Récupération du data grâce au v-model DEMANDER à Denis
     data() 
     {
-        return {email: "",password: "", nom: "", prenom: "", profil: ""};
+        return {email: "",password: "", nom: "", prenom: "", profil: "", id: ""};
     },
     // utilisation d'axios pour envoi des données 
     methods: 
@@ -214,14 +217,20 @@ ul
     /*height: 50px;
     max-height: 50px;*/
     width:100%;
-    /*border:solid green;*/
     /*margin-bottom: 15px;*/
     margin: 15px auto;
     /*rdx couleur noire*/
     color:#000000;font-weight: bold;font-size: 18px; 
     /*background-color: #ffb233;*/background-color: #ffffff;
     justify-content: center; align-items: center;
+    
 }
+input
+    {
+        margin-left: auto;
+        margin-right: auto;
+        color: #000000;
+    }
 .group-button
 {
     color:#000000;font-weight: bold;
