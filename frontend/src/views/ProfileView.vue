@@ -41,7 +41,7 @@
                             <label for="email">Email :</label>
                             <input  type="email" name="email"  id="email" readonly size = 30/> 
                             <br> 	                            
-                            
+                            <!-- j'ai supprimé la modification du password -->
                             <!--button id="validation "class="group-button" type="submit">Validation</button-->
                             <button id="deletion" class="group-button" type="submit">Suppression</button>
                         </fieldset>
