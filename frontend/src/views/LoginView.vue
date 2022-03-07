@@ -1,4 +1,5 @@
 <template>
+<!--DOCTYPE html-->
 <html lang="fr">
     <head>
         <meta charset="utf-8">
@@ -16,15 +17,15 @@
                 <h1>Connexion au réseau social d'entreprise de Groupomania</h1>
 
                 <section id="login-form">
-                    <form id="form_1"> 
+                    <form v-on:click.prevent="login" id="form"> <!-- à vérifier rdx prevent empéche l'événement submit de recharger la page https://www.pierrefay.fr/formation-vuejs/les-evenements.html -->
                         <fieldset class="FlexElt">
                             <legend>Connexion</legend> 
 
                             <label for="email">Email :</label>
-                            <input class="FlexElt" type="email" name="email" required placeholder="Saisissez votre email" id="email" /> 
-                            <br><br><br>		
+                            <input class="FlexElt" type="email" name="email" required placeholder="Saisissez votre email" id="email" v-model="email"/> 
+                            <br><!--br><br-->		
                             <label for="password">Mot de passe :</label>
-                            <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" /> 
+                            <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" v-model="password"/> 
                             <br><br><br>		
 
                             <button class="group-button" type="submit">Connexion</button>
@@ -35,7 +36,7 @@
                 <nav> 
                     <ul>
                     <li>
-                        <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
+                        <router-link class="link" to="/accueil"><p>Accueil</p></router-link> <!-- gestion du lien vers page d'accueil ? --> 
                     </li>
                     </ul>
                 </nav>
@@ -52,10 +53,9 @@ import axios from "axios";
 export default 
 {
     name: "Login",
-    //Récupération du data grâce au v-model DEMANDER à Denis
     data() 
     {
-        return {email: "",password: ""};
+        return {email: "",password: ""};  // selon v-model
     },
     // utilisation d'axios pour envoi des données 
     methods: 
@@ -63,13 +63,12 @@ export default
         login() 
         {
             axios
-            .post("http://localhost:3000/api/auth/login", { uEmail: this.email, uPassword: this.password })   // semblable à Postman 
-            // Création et enregistrement des données dans localStorage 
-            // et affichage des articles de la table post
+            .post("http://localhost:3000/api/auth/login", { uEmail: this.email, uPassword: this.password })  // semblable à Postman 
+                   
             .then((res) => 
             {
-                localStorage.setItem("groupomania-user", JSON.stringify(res.data));
-                this.$router.push("post");
+                localStorage.setItem("groupomania-user", JSON.stringify(res.data)); // création et enregistrement des données dans localStorage 
+                this.$router.push("post");  // affichage des articles contenus dans la table post
             })
             .catch((error) => 
             {
@@ -79,7 +78,6 @@ export default
     },
 };
 </script>
-
 
 <style>
 *
