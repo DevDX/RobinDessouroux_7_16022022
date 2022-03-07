@@ -36,7 +36,7 @@
 <style>
 *
 {
-    font-family: arial;  
+    text-decoration: none;list-style-type: none; font-family: arial;  
 }
 body
 {

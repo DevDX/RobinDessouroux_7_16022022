@@ -63,8 +63,7 @@ export default
     {
         login() 
         {
-            axios
-            .post("http://localhost:3000/api/auth/login", { uEmail: this.email, uPassword: this.password })  // semblable à Postman 
+            axios.post("http://localhost:3000/api/auth/login", { uEmail: this.email, uPassword: this.password })  // semblable à Postman 
                    
             .then((res) => 
             {
@@ -72,7 +71,8 @@ export default
                 this.$router.push("post");  // affichage des articles contenus dans la table post
             })
             .catch((error) => 
-            {
+            {   //this.errorMessage = error.message;
+                //console.error("There was an error!", this.errorMessage);
                 console.log(error);
             });
         },
@@ -83,7 +83,7 @@ export default
 <style>
 *
 {
-    font-family: arial;  
+    text-decoration: none;list-style-type: none; font-family: arial;  
 }
 body
 {
