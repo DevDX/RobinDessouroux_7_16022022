@@ -4,13 +4,13 @@
     <head>
         <meta charset="utf-8">
         <title>Groupomania réseau social interne</title> 
-        <link rel="shortcut icon" href="../image/icon.svg"/>
+        <link rel="shortcut icon" href="../images/icon.svg"/>
     </head>
     <body>
         <div class="login">
 
             <header> 
-                <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+                <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
             </header>
 
             <section id="choice">
@@ -36,7 +36,8 @@
                 <nav> 
                     <ul>
                     <li>
-                        <router-link class="link" to="/accueil"><p>Accueil</p></router-link> <!-- gestion du lien vers page d'accueil ? --> 
+                        <!--router-link class="link" to="/accueil"><p>Accueil</p></router-link--> 
+                        <router-link class="link" to="/"><p>Accueil</p></router-link>  
                     </li>
                     </ul>
                 </nav>
@@ -52,7 +53,7 @@ import axios from "axios";
 
 export default 
 {
-    name: "Login",
+    name: "LoginView",
     data() 
     {
         return {email: "",password: ""};  // selon v-model

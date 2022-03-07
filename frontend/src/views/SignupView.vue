@@ -3,13 +3,13 @@
     <head>
         <meta charset="utf-8">
         <title>Groupomania réseau social interne</title> 
-        <link rel="shortcut icon" href="../image/icon.svg"/>
+        <link rel="shortcut icon" href="../images/icon.svg"/>
     </head>
     <body>
         <div class="signup">
 
             <header> 
-                <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+                <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
             </header>
 
             <section id="choice">
@@ -24,9 +24,9 @@
                             <div class="container">
                                 <label for="user-profil">Profil :</label>
                                 <select name="user-profil" id="user-profil">
-                                <option value="">--SVP, sélectionnez votre profil</option>
-                                <option value="user">Utilisateur</option>
-                                <option value="admin">Administrateur</option>  
+                                    <option value="">--SVP, sélectionnez votre profil</option>
+                                    <option value="user">Utilisateur</option>
+                                    <option value="admin">Administrateur</option>  
                                 </select>
                             </div>
                             <br> 
@@ -50,9 +50,10 @@
 
                 <nav> 
                     <ul>
-                    <li>
-                        <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
-                    </li>
+                        <li>
+                            <!--router-link class="link" to="/accueil"><p>Accueil</p></router-link-->
+                            <router-link class="link" to="/"><p>Accueil</p></router-link>
+                        </li>
                     </ul>
                 </nav>
             </section>
@@ -67,7 +68,7 @@ import axios from "axios";
 
 export default 
 {
-    name: "Signup",
+    name: "SignupView",
     //Récupération du data grâce au v-model DEMANDER à Denis
     data() 
     {
@@ -115,7 +116,7 @@ header
     background-color: #ffb233;
     align-items: center;
     flex-wrap: wrap;
-    min-width:320px;
+    /*min-width:320px;*/
     margin-right:auto;
     margin-left: auto;
 }

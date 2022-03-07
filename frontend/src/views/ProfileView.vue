@@ -4,13 +4,13 @@
     <head>
         <meta charset="utf-8">
         <title>Groupomania réseau social interne</title> 
-        <link rel="shortcut icon" href="../image/icon.svg"/>
+        <link rel="shortcut icon" href="../images/icon.svg"/>
     </head>
     <body>
         <div class="signup">
 
             <header> 
-                <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+                <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
             </header>
 
             <section id="choice">
@@ -67,7 +67,7 @@ import axios from "axios";
 
 export default 
 {
-    name: "Profile",
+    name: "ProfileView",
     //Récupération du data grâce au v-model DEMANDER à Denis
     data() 
     {

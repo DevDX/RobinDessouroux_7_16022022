@@ -4,12 +4,12 @@
     <head>
         <meta charset="utf-8">
         <title>Groupomania réseau social interne</title> 
-        <link rel="shortcut icon" href="../image/icon.svg"/>
+        <link rel="shortcut icon" href="../images/icon.svg"/>
     </head>
     <body>
         
         <header> 
-            <img id="logo-groupomania-black" src="../image/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+            <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
         </header> 
         
         <section id="choice">
@@ -18,10 +18,12 @@
             <nav> 
                 <ul>
                 <li>
-                    <router-link class="link" to="/signup" ><p>Inscription</p></router-link >
+                    <!--router-link class="link" to="/Signup"><p>Inscription</p></router-link-->
+                    <router-link class="link" to="/inscription"><p>Inscription</p></router-link >
                 </li>
+
                 <li>
-                    <router-link class="link" to="/login"><p>Connexion</p></router-link>
+                    <router-link class="link" to="/connexion"><p>Connexion</p></router-link>
                 </li>
                 </ul>
             </nav>
