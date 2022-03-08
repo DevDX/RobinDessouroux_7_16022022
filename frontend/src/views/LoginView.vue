@@ -33,14 +33,14 @@
                     </form>
                 </section>
 
-                <nav> 
+                <!--nav> 
                     <ul>
-                    <li>
+                    <li-->
                         <!--router-link class="link" to="/accueil"><p>Accueil</p></router-link--> 
-                        <router-link class="link" to="/"><p>Accueil</p></router-link>  
+                        <!--router-link class="link" to="/"><p>Accueil</p></router-link>  
                     </li>
                     </ul>
-                </nav>
+                </nav-->
             </section>
 
         </div>
@@ -69,7 +69,7 @@ export default
             {
                 localStorage.setItem("groupomania-user", JSON.stringify(res.data)); // création et enregistrement des données dans localStorage 
                 //this.$router.push("post");  // affichage des articles contenus dans la table post
-                this.$router.push("articles");  // affichage des articles contenus dans la table post
+                this.$router.push("/profil");  // affichage des articles contenus dans la table post
             })
             .catch((error) => 
             {   //this.errorMessage = error.message;
@@ -81,10 +81,10 @@ export default
 };
 </script>
 
-<style>
+<style scoped>
 *
 {
-    text-decoration: none;list-style-type: none; font-family: arial;  
+    text-decoration: none; list-style-type: none; font-family: arial;  color: #000000;
 }
 body
 {

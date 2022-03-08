@@ -14,7 +14,7 @@
             </header>
 
             <section id="choice">
-                <h1>Mon Profil utilisateur</h1>
+                <h1>Bonjour {{ this.prenom }} </h1>
 
                 <section id="signup-form">
                     <form id="form_1"> 
@@ -23,7 +23,7 @@
                             <legend>Informations personnelles</legend>
                                         
                             <div class="container">
-                                <label for="userid">Table user id : {{ id }}</label>
+                                <label for="userid">Table user - id : {{ this.id }}</label>
                                 <!--select name="profil" id="profil"-->
                                 <label for="profil" v-if="uIsadmin === true">Administrateur</label>
                                 <label for="profil" v-else>Utilisateur</label>
@@ -74,6 +74,15 @@ export default
         return {email: "", nom: "", prenom: "", profil: "", id: ""};
     },
     // utilisation d'axios pour envoi des données 
+    // récupération depusi le ls
+    mounted: function() {
+    let  userData= JSON.parse(localStorage.getItem("groupomania-user")).userData 
+    /*console.log(userData);*/
+    this.email=userData.uEmail,
+    this.nom=userData.uName,
+    this.prenom=userData.uFirstname,
+    this.id=userData.id
+    }, 
     methods: 
     {
         profile() 
@@ -97,10 +106,10 @@ export default
 </script>
 
 
-<style>
+<style scoped >
 *
 {
-    font-family: arial;  
+    font-family: arial;  color: #000000;
 }
 body
 {

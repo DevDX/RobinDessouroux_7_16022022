@@ -1,12 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router' // à vérifier avec Denis
 //import HomeView from '../views/HomeView.vue' // à vérifier avec Denis plutôt AccueilView.vue ?
-import HomeView from '../views/AccueilView.vue' // ou nom indispensable Home ? Dans ce cas renommer.  
+import AccueilView from '../views/AccueilView.vue' // ou nom indispensable Home ? Dans ce cas renommer.  
 
 const routes = [
   { // le menu initial
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Accueil',
+    component: AccueilView
   },
   { // création d'un utilisateur 
     path: '/inscription',

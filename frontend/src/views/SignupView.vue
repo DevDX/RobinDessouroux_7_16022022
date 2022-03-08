@@ -16,7 +16,7 @@
                 <h1>Inscription au réseau social d'entreprise de Groupomania</h1>
 
                 <section id="signup-form">
-                    <form id="form_1"> 
+                    <form id="form_1" v-on:click.prevent="signup"> 
                         <fieldset class="FlexElt">
                             <legend>Inscription</legend> 
                             <legend>Informations personnelles</legend>
@@ -31,31 +31,31 @@
                             </div>
                             <br> 
                             
-                            <label for="nom">Nom :</label> <input class="FlexElt" type="text" name="nom" required placeholder="Saisissez votre nom" id="nom" aria-label="Saisissez-votre nom"/>   
+                            <label for="nom">Nom :</label> <input class="FlexElt" type="text" name="nom" v-model="nom" required placeholder="Saisissez votre nom" id="nom" aria-label="Saisissez-votre nom"/>   
                             <br> 	
-                            <label for="prenom">Prénom :</label> <input class="FlexElt" type="text" name="prenom" required placeholder="Saisissez votre prénom" id="prenom" aria-label="Saisissez-votre prénom"/>   
+                            <label for="prenom">Prénom :</label> <input class="FlexElt" type="text" name="prenom" v-model="prenom" required placeholder="Saisissez votre prénom" id="prenom" aria-label="Saisissez-votre prénom"/>   
                             <br> 					
                             <label for="email">Email :</label>
-                            <input class="FlexElt" type="email" name="email" required placeholder="Saisissez votre email" id="email" /> 
+                            <input class="FlexElt" type="email" name="email" v-model="email" required placeholder="Saisissez votre email" id="email" /> 
                             <br> 	
                             <label for="password">Mot de passe :</label>
-                            <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" /> 
+                            <input class="FlexElt" type="password" name="password" v-model="password" required placeholder="Saisissez votre mot de passe" id="password" /> 
                             <br>                      
                             
                             
-                            <button class="group-button" type="submit">Inscription</button>
+                            <button class="group-button" type="submit" >Inscription</button>
                         </fieldset>
                     </form>
                 </section>
 
-                <nav> 
+                <!--nav> 
                     <ul>
                         <li>
-                            <!--router-link class="link" to="/accueil"><p>Accueil</p></router-link-->
+                            <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
                             <router-link class="link" to="/"><p>Accueil</p></router-link>
                         </li>
                     </ul>
-                </nav>
+                </nav-->
             </section>
 
         </div>
@@ -79,14 +79,14 @@ export default
     {
         signup() 
         {
+            let self=this;
             axios
             .post("http://localhost:3000/api/auth/signup", { uEmail: this.email, uPassword: this.password, uName: this.nom, uFirstname: this.prenom })   // semblable à Postman 
             // Création et enregistrement des données dans localStorage 
             // et affichage des articles de la table post
-            .then((res) => 
+            .then(() => 
             {
-                localStorage.setItem("groupomania-user", JSON.stringify(res.data));
-                this.$router.push("post");
+                self.$router.push("/connexion");
             })
             .catch((error) => 
             {
@@ -98,10 +98,10 @@ export default
 </script>
 
 
-<style>
+<style scoped>
 *
 {
-   text-decoration: none;list-style-type: none; font-family: arial;  
+   text-decoration: none;list-style-type: none; font-family: arial;  color: #000000;
 }
 body
 {

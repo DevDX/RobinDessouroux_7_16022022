@@ -100,10 +100,10 @@ export default
 };
 </script>
 
-<style>
+<style scoped >
 * 
 {
-  text-decoration: none;list-style-type: none; font-family: arial;  
+  text-decoration: none;list-style-type: none; font-family: arial;  color: #000000;
 }
 body,img
 {

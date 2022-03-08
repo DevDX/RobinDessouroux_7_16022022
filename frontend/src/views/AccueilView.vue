@@ -15,28 +15,28 @@
         <section id="choice">
             <h1>Bienvenue sur le réseau social d'entreprise de Groupomania</h1>
             <h2>Rejoignez notre Communauté</h2>
-            <nav> 
+            <!--nav> 
                 <ul>
-                <li>
+                <li-->
                     <!--router-link class="link" to="/Signup"><p>Inscription</p></router-link-->
-                    <router-link class="link" to="/inscription"><p>Inscription</p></router-link >
+                    <!--router-link class="link" to="/inscription"><p>Inscription</p></router-link >
                 </li>
 
                 <li>
                     <router-link class="link" to="/connexion"><p>Connexion</p></router-link>
                 </li>
                 </ul>
-            </nav>
+            </nav-->
         </section>
     
     </body>
 </html>    
 </template>
 
-<style>
+<style scoped >
 *
 {
-    text-decoration: none;list-style-type: none; font-family: arial;  
+    text-decoration: none;list-style-type: none; font-family: arial;  color: #000000;
 }
 body
 {
