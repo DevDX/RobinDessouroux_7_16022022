@@ -90,12 +90,15 @@ else {
 
 
 exports.login = (req, res, next) => {
-    User.findOne({ uEmail: req.body.uEmail })    
+    //User.findOne({ uEmail: req.body.uEmail })    
+    User.findOne({ where: {uEmail: req.body.uEmail} })   
     .then(user => {
-        if(!user) {
+        /*if(!user) {
             return res.status(401).json({ error : 'Utilisateur non trouvé !' });
-        }
-        console.log(user.id);
+        }*/
+        console.log("id dans table user : "+user.id);
+        console.log("email dans table : " +user.uEmail);
+        console.log("email reçu : " +req.body.uEmail);
         console.log(req.body.uPassword);
         console.log(user.uPassword);
         bcrypt.compare(req.body.uPassword, user.uPassword)
@@ -115,7 +118,11 @@ exports.login = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    /*.catch(error => res.status(500).json({ error }));*/
+    .catch(error => { console.log("Utilisateur non trouvé !");  });
+    /*if(!user) {
+        return res.status(401).json({ error : 'Utilisateur non trouvé !' });
+    };*/
 
 }; 
 

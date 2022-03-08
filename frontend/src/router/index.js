@@ -3,31 +3,36 @@ import { createRouter, createWebHistory } from 'vue-router' // à vérifier avec
 import HomeView from '../views/AccueilView.vue' // ou nom indispensable Home ? Dans ce cas renommer.  
 
 const routes = [
-  {
+  { // le menu initial
     path: '/',
     name: 'home',
     component: HomeView
   },
-  {
+  { // création d'un utilisateur 
     path: '/inscription',
     name: 'Signup',
     component: () => import('../views/SignupView.vue')
   },
-  {
-    path: '/articles',
-    name: 'AllPosts',
-    component: () => import('../views/PostView.vue')
-  },
-  {
+  { // la connexion d'un utilisateur existant
     path: '/connexion',
     name: 'Login',
     component: () => import('../views/LoginView.vue')
   },
-  { // w en cours
+  { // le profil utilisateur 
     path: '/profil',
     name: 'Profile',
     component: () => import('../views/ProfileView.vue')
-  }
+  },
+  { // tous les articles
+    path: '/articles',
+    name: 'AllPosts',
+    component: () => import('../views/PostView.vue')
+  },
+  /*{ // en cours... ajout d'un nouvel article et commentaire
+    path: '/ajoutpost',
+    name: 'AddPost',
+    component: () => import('../views/AddNewPost.vue')
+  }*/
 ]
 
 const router = createRouter({

@@ -68,7 +68,8 @@ export default
             .then((res) => 
             {
                 localStorage.setItem("groupomania-user", JSON.stringify(res.data)); // création et enregistrement des données dans localStorage 
-                this.$router.push("post");  // affichage des articles contenus dans la table post
+                //this.$router.push("post");  // affichage des articles contenus dans la table post
+                this.$router.push("articles");  // affichage des articles contenus dans la table post
             })
             .catch((error) => 
             {   //this.errorMessage = error.message;

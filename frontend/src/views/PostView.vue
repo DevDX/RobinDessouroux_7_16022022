@@ -89,7 +89,7 @@ export default
     logout() 
     {
       localStorage.removeItem("groupomania-user");
-      this.$router.push("connexion"); // à vérifier 
+      this.$router.push("connexion"); // à vérifier si acceptable, c'est retour vers la page de connexion
     },
   },
   // La fonction qui affiche les articles est montée dans le DOM
