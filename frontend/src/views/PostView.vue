@@ -17,17 +17,17 @@
             <div class="FlexElt"> 
                 <nav>
                     <ul>
-                    <li>
-                        <router-link class="link" to="/mon_profil"><p>Mon profil</p></router-link>
-                    </li>
-                    <li>
-                        <router-link to="/" @click="logout" class="link"><p>Deconnexion</p></router-link
-                        >
-                    </li>
-                    <li>
-                        <router-link id="add-post" class="link" to="/ecrire-un-nouvel-article"><p>Ajouter un article</p></router-link
-                        >
-                    </li>
+                      <!--li>
+                          <router-link class="link" to="/mon_profil"><p>Mon profil</p></router-link>
+                      </li>
+                      <li>
+                          <router-link to="/" @click="logout" class="link"><p>Deconnexion</p></router-link
+                          >
+                      </li-->
+                      <li>
+                          <router-link id="add-post" class="link" to="/ajoutpost"><p>Ajouter un article</p></router-link
+                          >
+                      </li>
                     </ul>
                 </nav>
             </div>
@@ -122,7 +122,7 @@ header
   background-color: #ffb233;
   align-items: center;
   flex-wrap: wrap;
-  min-width:320px;
+  min-width:280px;
   margin-right:auto;
   margin-left: auto;
 }
@@ -130,7 +130,7 @@ header
 {
   max-width: 170px;height:170px;    
   padding: 0;
-  margin: 10px auto;
+  margin: 5px auto;
 }  
 h1 
 {
@@ -160,52 +160,50 @@ h1
   width:100%;
   /*border:solid green;*/
   /*margin-bottom: 15px;*/
-  margin: 0 auto 15px auto;
+  margin: 0 auto 10px auto;
   /*rdx couleur noire*/
   color:#000000;font-weight: bold;font-size: 18px; 
   /*background-color: #ffb233;*/background-color:#ffffff;
   justify-content: center;
   border: 1px solid #000000;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;  
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;    
+  border-radius: 10px;    
 }   
 .link 
 {    
   /*margin-left: auto; /* à vérifier rdx */
   /*margin-left:0;*/
   /*margin-right:auto; /* à vérifier rdx */
-  margin: 10px auto;
-  padding-left: 0;
+  margin: 5px auto;
+  padding: 5px;
   /*padding-right: 10px;*/
-  font-size: 18px; /*font-size: 20px;*/ 
+  font-size: 16px; /*font-size: 20px;*/ 
   font-weight: bold;
   color: #000000;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;  
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;  
+  border-radius: 10px;
   background-color: #ffb233;
-  height: 52px; /*width:100%;*/width:150px;
+  height: 30px; /*width:100%;*/width:175px;
   align-content: center;
   /*border: 1px solid;*/  
   border: 1px solid #000000;
   box-shadow: 0 0 4px black;
   display: flex;
-  flex-direction: row;
+  flex-direction: row;justify-content: center; align-content: center;
 }
 /*.link*/ p 
 {
   text-align: center;
   align-self: center;
   /*margin: 10px auto;*/ margin: auto;
-  padding: 11px; 
+  padding: 5px; 
+}
+p:hover
+{
+color: #ffffff; transition: all .3s ease-in-out;
 }
 .link:hover
 {
   background-color: #000000;
-  color: #ffffff;
+  /* color: #ffffff; */
   transition: all .3s ease-in-out;
 }    
 #list-container 

@@ -28,11 +28,11 @@ const routes = [
     name: 'AllPosts',
     component: () => import('../views/PostView.vue')
   },
-  /*{ // en cours... ajout d'un nouvel article et commentaire
+  { // en cours... ajout d'un nouvel article et commentaire
     path: '/ajoutpost',
     name: 'AddPost',
-    component: () => import('../views/AddNewPost.vue')
-  }*/
+    component: () => import('../views/AddNewPostView.vue')
+  }
 ]
 
 const router = createRouter({

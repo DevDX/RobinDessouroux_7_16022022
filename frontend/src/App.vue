@@ -39,7 +39,7 @@ nav {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  border: 1px solid red;
+  /*border: 1px solid red;*/
 }
 
 nav a {
@@ -70,12 +70,13 @@ font-weight: bold;
   nav 
   {
     flex-direction: column;
+    padding: 2px;
   }
   #logout
   {
     padding: 1px 2px;
     width: 100px;
-    margin: 0 auto;
+    margin: 0 auto 2px auto;
   }
 }
 </style>

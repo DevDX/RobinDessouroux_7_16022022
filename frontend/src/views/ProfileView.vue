@@ -17,7 +17,7 @@
                 <h1>Bonjour {{ this.prenom }} </h1>
 
                 <section id="signup-form">
-                    <form id="form_1"> 
+                    <form id="form_1" v-on:click.prevent="deletion"> 
                         <fieldset class="FlexElt">
                             <legend>Mon Profil</legend> 
                             <legend>Informations personnelles</legend>
@@ -34,12 +34,12 @@
                             </div>
                             <br> 
                             
-                            <label for="nom">Nom :</label> <input  type="text" name="nom" id="nom" readonly  size = 30/>   
+                            <label for="nom">Nom :</label> <input  type="text" name="nom" id="nom" v-model="nom" readonly  size = 30/>   
                             <br> 	
-                            <label for="prenom">Prénom :</label> <input  type="text" name="prenom"  id="prenom" readonly size = 30/>   
+                            <label for="prenom">Prénom :</label> <input  type="text" name="prenom"  id="prenom" v-model="prenom" readonly size = 30/>   
                             <br> 					
                             <label for="email">Email :</label>
-                            <input  type="email" name="email"  id="email" readonly size = 30/> 
+                            <input  type="email" name="email"  id="email" readonly v-model="email" size = 30/> 
                             <br> 	                            
                             <!-- j'ai supprimé la modification du password -->
                             <!--button id="validation "class="group-button" type="submit">Validation</button-->
@@ -48,13 +48,13 @@
                     </form>
                 </section>
 
-                <nav> 
+                <!--nav> 
                     <ul>
                     <li>
                         <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
                     </li>
                     </ul>
-                </nav>
+                </nav-->
             </section>
 
         </div>
@@ -81,20 +81,21 @@ export default
     this.email=userData.uEmail,
     this.nom=userData.uName,
     this.prenom=userData.uFirstname,
-    this.id=userData.id
+    this.id=userData.id,
+    this.profil=userData.uIsadmin
     }, 
     methods: 
     {
-        profile() 
+        /*profile()*/
+        deletion() 
         {
-            axios
-            .put("http://localhost:3000/api/auth/{this.id}", { uEmail: this.email, uName: this.nom, uFirstname: this.prenom , uIsadmin: this.profil })   // semblable à Postman 
+            axios.delete("http://localhost:3000/api/auth/{this.id}", { uEmail: this.email, uName: this.nom, uFirstname: this.prenom , uIsadmin: this.profil })   // semblable à Postman 
             // Création et enregistrement des données dans localStorage 
             // et affichage des articles de la table post
-            .then((res) => 
+            .then(() => 
             {
-                localStorage.setItem("groupomania-user", JSON.stringify(res.data));
-                this.$router.push("post");
+                localStorage.clear();
+                this.$router.push("/");
             })
             .catch((error) => 
             {
@@ -124,7 +125,7 @@ header
     background-color: #ffb233;
     align-items: center;
     flex-wrap: wrap;
-    min-width:320px;
+    min-width:280px;
     margin-right:auto;
     margin-left: auto;
 }
