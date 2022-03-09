@@ -44,9 +44,9 @@
             Afficher l'objet post dans le tableau posts -->
             <ul id="list-container">
               <li id="post" v-for="post in posts" :key="post">
-                  <h2>{{ post.title }}</h2>
-                  <div id="post-content">{{ post.content }}</div>
-                  <div id="published"> Publié le {{ post.createdAt }} par {{ post.user.name }} {{ post.user.lastname }}</div>
+                  <h2>{{ post.postTitle }}</h2>
+                  <div id="post-content">{{ post.postContent }}</div>
+                  <div id="published"> Publié le {{ post.createdAt }} par </div> <!-- à ajouter {{ user.uFirstname }} {{ user.uNname }}-->
 
                   <!-- Chemin qui redirige vers la page qui affiche l'article grâce à son id-->
                   <router-link id="link-to-article" :to="{ name: 'OnePost', params: { id: post.id } }"

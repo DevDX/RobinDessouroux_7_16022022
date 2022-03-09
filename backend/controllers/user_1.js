@@ -120,8 +120,7 @@ exports.login = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
     })
     /*.catch(error => res.status(500).json({ error }));*/
-    /*.catch(error => { console.log("Utilisateur non trouvé !");  }); 09/03/2022 */
-    .catch(error => res.status(404).json({ error: 'Utilisateur sequelize non trouvé' }))
+    .catch(error => { console.log("Utilisateur non trouvé !");  });
     /*if(!user) {
         return res.status(401).json({ error : 'Utilisateur non trouvé !' });
     };*/
@@ -139,24 +138,64 @@ exports.getUser = (req, res,next) =>
 // fin sequelize données utilisateur
 
 // début suppression utilisateur
-exports.deleteUser = (req, res, next) => 
-{
-    /*User.findOne( { where: { _id: req.params.id } })*/
-    User.findByPk( req.params.id  )
-    .then(user => 
-        {       
-            {
+exports.deleteUser = (req, res, next) => {
+    User.findOne( { _id: req.params.id } )
+    .then(user => {
+          if(user.imageUrl)
+          {
+              const filename = user.imageUrl.split('/images/')[1];
+              fs.unlink(`images/${filename}`, () => 
+              {
+                  User.destroy({ where: { id: req.params.id } }) // à vérifier rdx
+                  .then(() => res.status(200).json({ message: 'User sequelize supprimé !'}))
+                  .catch(error => res.status(400).json({ error }));
+              });   
+          }
+          else
+          /*
+          // début test rdx 26/02/2022
+          {
+            User.beforeBulkDestroy(({where, individualHooks}) => {
+                        // début update table post
+                        Post.update 
+                        (
+                            {
+                                userId : 0     // à vérifier rdx
+                            },  
+                            {
+                                where: { userId: req.params.id   } // à vérifier rdx  
+                            }                             
+                        ) 
+                        // fin update table post 
+          })
+        }
+                                   
+                     
+          // fin test rdx 26/02/2022
+          */
+         
+          {
               User.destroy({ where: { id: req.params.id } }) // à vérifier rdx
               //.then(() => res.status(200).json({ message: 'Objet sequelize supprimé !'}))
               .then(() => res.status(200).json({ message: 'User sequelize supprimé !'}))
               //.then( console.log("User sequelize id "+ req.params.id + " supprimé. Vérifiez la table post, champ userId !")) 
               .catch(error => res.status(400).json({ error }));
-            } 
-        })
+          } 
+
+          /*{
+              //Post.update({ userId : 3 } , {where: { userId : null  } }) // à vérifier rdx    
+              //idAdmin = ('id', { where: { uIsadmin:  1 }  }); // Quel est l'Admin ?
+              console.log("idAdmin : " + idAdmin);    
+              Post.update({ userId : idAdmin } , {where: { userId : null  } }) // à vérifier rdx      27/02/2022 
+              .then( console.log("Table post sequelize contenant userId = "+ req.params.id + " a été updatée. Vérifiez la table post ! ")) 
+              //.catch(error => res.status(400).json({ error }));
+              .catch(err =>  console.log("update non fait " +err));  
+          }*/      
+     })
     //.catch(error => res.status(500).json({ error : "ligne 126 de controllers/user.js" }));   
     //.catch(error => {console.log("erreur 500 ligne 160 controllers/user.js :" + error +" "+req.params.id ) });   
     .catch(err => {console.log(err) });  
-};
+  };
   
 // fin suppression utilisateur
 

@@ -17,7 +17,7 @@
                 <h1>Connexion au réseau social d'entreprise de Groupomania</h1>
 
                 <section id="login-form">
-                    <form v-on:click.prevent="login" id="form"> <!-- à vérifier rdx prevent empéche l'événement submit de recharger la page https://www.pierrefay.fr/formation-vuejs/les-evenements.html -->
+                    <form  id="form"> <!-- à vérifier rdx prevent empéche l'événement submit de recharger la page https://www.pierrefay.fr/formation-vuejs/les-evenements.html -->
                         <fieldset class="FlexElt">
                             <legend>Connexion</legend> 
 
@@ -28,7 +28,7 @@
                             <input class="FlexElt" type="password" name="password" required placeholder="Saisissez votre mot de passe" id="password" v-model="password"/> 
                             <br><br><br>		
 
-                            <button class="group-button" type="submit">Connexion</button>
+                            <button class="group-button" type="submit" v-on:click.prevent="login">Connexion</button>
                         </fieldset>
                     </form>
                 </section>
@@ -74,7 +74,8 @@ export default
             .catch((error) => 
             {   //this.errorMessage = error.message;
                 //console.error("There was an error!", this.errorMessage);
-                console.log(error);
+                alert("erreur pour cet utilisateur et ce mot de passe");
+                console.log(error);      
             });
         },
     },

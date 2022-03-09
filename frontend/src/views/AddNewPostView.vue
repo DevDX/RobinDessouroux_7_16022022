@@ -48,7 +48,7 @@
                       <br><br><br>
 
                       <!-- bouton de publication -->
-                      <button id="publish-post">Publier</button>
+                      <button id="publish-post" @click="publishPost">Publier</button>
                   </div>
                 </article>
             </section>
@@ -56,8 +56,56 @@
 </html>   
 </template>
 
-<script>    // adaptations à faire rdx cf. signup ?  
-//import PostRoutes from "../services/auth.post";
+<script>      
+
+import PostRoutes from "../services/auth-post";
+
+export default {
+  name: "AddNewPostView",
+  // un post contient un id, un titre et le contenu de l' article
+  data() {
+    return {
+      post: {
+        id: null,
+        title: "",
+        content: ""
+      },
+      submitted: false
+    };
+  },
+  methods: {
+    //Fonction qui permet la création d'un article tout en récupérant 
+    //l'id de l'utilisateur issue du localStorage
+    publishpost() {
+      let  userData= JSON.parse(localStorage.getItem("groupomania-user")).userData 
+
+      //variable contentant un objet avec le titre, contenu et l'id de l'utilisateur
+      //Utilisation de this. pour récup le data du post
+      const data = {
+        title: this.postTitle,
+        content: this.postContent,
+        userId: userData.id // vérifier si utile ? peut être créé automatiquement ?
+      };
+
+      // PostRoutes (axios) 
+      PostRoutes.create(data)
+        .then(() => {
+          this.submitted = true;
+          this.$router.push("/articles");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+    //Déconnexion en retirant du localStorage l'utilisateur 
+    //Redirection vers la page de connexion
+     logout() {
+      localStorage.removeItem("groupomania-user");
+      this.$router.push("connexion");
+    },
+  },
+};
 </script>
 
 <style>

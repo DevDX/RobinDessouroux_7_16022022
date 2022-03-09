@@ -16,7 +16,7 @@
                 <h1>Inscription au réseau social d'entreprise de Groupomania</h1>
 
                 <section id="signup-form">
-                    <form id="form_1" v-on:click.prevent="signup"> 
+                    <form id="form_1" > 
                         <fieldset class="FlexElt">
                             <legend>Inscription</legend> 
                             <legend>Informations personnelles</legend>
@@ -43,7 +43,7 @@
                             <br>                      
                             
                             
-                            <button class="group-button" type="submit" >Inscription</button>
+                            <button class="group-button" type="submit" v-on:click.prevent="signup">Inscription</button>
                         </fieldset>
                     </form>
                 </section>
@@ -69,7 +69,7 @@ import axios from "axios";
 export default 
 {
     name: "SignupView",
-    //Récupération du data grâce au v-model DEMANDER à Denis
+    // Récupération de data grâce aux v-model 
     data() 
     {
         return {email: "",password: "", nom: "", prenom: ""};
@@ -80,10 +80,9 @@ export default
         signup() 
         {
             let self=this;
-            axios
-            .post("http://localhost:3000/api/auth/signup", { uEmail: this.email, uPassword: this.password, uName: this.nom, uFirstname: this.prenom })   // semblable à Postman 
+            axios.post("http://localhost:3000/api/auth/signup", { uEmail: this.email, uPassword: this.password, uName: this.nom, uFirstname: this.prenom })   // semblable à Postman 
             // Création et enregistrement des données dans localStorage 
-            // et affichage des articles de la table post
+            // et affichage de l'écran de login
             .then(() => 
             {
                 self.$router.push("/connexion");

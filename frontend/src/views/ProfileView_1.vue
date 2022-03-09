@@ -43,7 +43,7 @@
                             <br> 	                            
                             <!-- j'ai supprimé la modification du password -->
                             <!--button id="validation "class="group-button" type="submit">Validation</button-->
-                            <button id="deletion" class="group-button" type="submit" @click="deletion" >Suppression</button>
+                            <button id="deletion" class="group-button" type="submit">Suppression</button>
                         </fieldset>
                     </form>
                 </section>
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+/*import axios from "axios";*/
 import userRoutes from "../services/auth-user";
 
 export default 
@@ -73,7 +74,8 @@ export default
     {
         return {email: "", nom: "", prenom: "", profil: "", id: ""};
     },
-    // récupération des données depuis le ls
+    // utilisation d'axios pour envoi des données 
+    // récupération depusi le ls
     mounted: function() {
     let  userData= JSON.parse(localStorage.getItem("groupomania-user")).userData 
     /*console.log(userData);*/
@@ -86,29 +88,26 @@ export default
     this.token=JSON.parse(localStorage.getItem("groupomania-user")).token
     }, 
     methods: 
-    { 
-
-        /* Suppression de l'utilisateur */
-        deletion(id) 
+    {
+        /*profile()*/
+        deletion() 
         {
-        let storageUser = JSON.parse(localStorage.getItem("groupomania-user")).userData; let wToken=JSON.parse(localStorage.getItem("groupomania-user")).token
-        id = storageUser.id; console.log("ligne 99 "+storageUser.id);    console.log("wToken "+wToken);
-        
-            userRoutes.delete(id)
+            console.log("http://localhost:3000/api/auth/"+this.id);
+            console.log(this.token);
+            /*axios.delete("http://localhost:3000/api/auth/"+this.id ,  { uEmail: this.email, uPasswordName: this.password , headers: {
+						Authorization: "Bearer " + this.token
+					}, })*/
+            userRoutes.delete(this.id)         
             .then(() => 
             {
-                localStorage.clear(); 
-                this.$router.push("/connexion");
-                console.log("Compte supprimé !");alert("user " +id+ " supprimé");
+                localStorage.clear();
+                this.$router.push("/");
             })
             .catch((error) => 
             {
-                console.log(error); console.log("Votre compte n'a pas été supprimé! " +storageUser.id); console.log("mdp " +storageUser.uPassword); console.log("token "+storageUser.token);
-            });        
-        
+                console.log(error);
+            });
         },
-        
-
     },
 };
 </script>
