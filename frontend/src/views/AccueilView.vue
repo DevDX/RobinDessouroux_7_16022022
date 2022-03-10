@@ -51,7 +51,7 @@ header
     background-color: #ffb233;
     align-items: center;
     flex-wrap: wrap;
-    min-width:320px;
+    min-width:280px;
     margin-right:auto;
     margin-left: auto;
 }

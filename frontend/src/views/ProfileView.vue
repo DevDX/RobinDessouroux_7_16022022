@@ -23,9 +23,9 @@
                             <legend>Informations personnelles</legend>
                                         
                             <div class="container">
-                                <label for="userid">Table user - id : {{ this.id }}</label>
+                                <label for="userid">Table user - id : {{ this.id }} </label>
                                 <!--select name="profil" id="profil"-->
-                                <label for="profil" v-if="uIsadmin === true">Administrateur</label>
+                                <label for="profil" v-if="this.profil === true">Administrateur</label>  
                                 <label for="profil" v-else>Utilisateur</label>
                                 <!--option value="">--SVP, sélectionnez votre profil</option>
                                 <option value="user">Utilisateur</option>

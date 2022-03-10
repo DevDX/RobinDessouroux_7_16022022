@@ -2,9 +2,9 @@
   <div class="container">
     <nav>
       <router-link to="/">Accueil</router-link> 
-      <router-link to="/profil">Profile</router-link>
-      <!--router-link to="/articles">AllPosts</router-link-->
-      <router-link to="/post">AllPosts</router-link>
+      <router-link v-if="this.login === true" to="/profil">Profile</router-link>
+      <router-link v-if="this.login === true" to="/ajoutpost">AddPost</router-link>
+      <router-link v-if="this.login === true" to="/post">AllPosts</router-link>
       <router-link to="/connexion">Login</router-link>
       <router-link to="/inscription">Signup</router-link>
       <div id="logout" @click="logout">Logout</div>
@@ -20,7 +20,7 @@ export default {
   methods: {
   logout() {
     localStorage.clear();
-    this.$router.push("/connexion")
+    this.$router.push("/connexion") // écran de login
     }
   },
 }
@@ -66,7 +66,8 @@ font-weight: bold;
   color: #ffffff; transition: all .3s ease-in-out;
 }
 
-@media screen and (max-width: 376px)
+/*@media screen and (max-width: 376px)*/
+@media screen and (max-width: 535px)
 {
   nav 
   {

@@ -1,8 +1,10 @@
 //const Post = require('../models/Thing'); // à adapter pour chaque model rdx
 
 const fs = require('fs');
+const { user } = require('../models');
 const db = require("../models");
 const Post = db.post;
+const Message = db.message;
 
 
 exports.createPost  = (req, res, next) => {   
@@ -12,6 +14,7 @@ exports.createPost  = (req, res, next) => {
       postTitle : req.body.postTitle,           
       postContent : req.body.postContent,
       //inutile postOwner : req.body.postOwner, // userid ou req.body.postOwner à vérifier rdx
+      postOwner : req.body.postOwner,
       //postImageUrl :   `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  //  à vérifier rdx
       postImageUrl : ""
     })
@@ -124,15 +127,15 @@ exports.getAllPosts = (req, res, next) => {
     ['id',
      `postTitle` ,
      `postContent` ,
-     //`postOwner` ,
+     `postOwner` ,
      `postImageUrl` ,
      `createdAt` ,
      `updatedAt`,
      `userId` 
-   ],})  
+   ], include: Message })  
     .then((posts) => {
       // test rdx 24/02/2022 res.status(200).json({posts: 'Objets sequelize retrouvés !'}); 
-      res.status(200).json({posts: posts}); // test 24/02/2022 rdx
+      res.status(200).json( posts ); // test 24/02/2022 rdx
     })
     .catch((error) => {
       res.status(400).json({

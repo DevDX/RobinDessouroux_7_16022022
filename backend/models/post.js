@@ -36,9 +36,9 @@ module.exports = (sequelize, Sequelize) => {
             },
         
             // Column-4, owner
-            //postOwner:                  // vérifier si  utile rdx  
-            //{ 
-                //type: Sequelize.STRING, 
+            postOwner:                  // vérifier si  utile rdx  
+            { 
+                type: Sequelize.STRING, 
                 //type: Sequelize.INTEGER,
                 //allowNull:false,
                 /*references: 
@@ -47,7 +47,7 @@ module.exports = (sequelize, Sequelize) => {
                     key: 'u_id',
                     onDelete: 'CASCADE'
                 } */
-            //},
+            },
             // Column-5, post picture
             postImageUrl: 
             { 
