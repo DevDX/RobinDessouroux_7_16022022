@@ -3,7 +3,8 @@
     <nav>
       <router-link to="/">Accueil</router-link> 
       <router-link to="/profil">Profile</router-link>
-      <router-link to="/articles">AllPosts</router-link>
+      <!--router-link to="/articles">AllPosts</router-link-->
+      <router-link to="/post">AllPosts</router-link>
       <router-link to="/connexion">Login</router-link>
       <router-link to="/inscription">Signup</router-link>
       <div id="logout" @click="logout">Logout</div>

@@ -24,7 +24,8 @@ const routes = [
     component: () => import('../views/ProfileView.vue')
   },
   { // tous les articles
-    path: '/articles',
+    //path: '/articles',
+    path: '/post',
     name: 'AllPosts',
     component: () => import('../views/PostView.vue')
   },

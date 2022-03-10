@@ -91,7 +91,8 @@ export default {
       PostRoutes.create(data)
         .then(() => {
           this.submitted = true;
-          this.$router.push("/articles");
+          //this.$router.push("/articles");
+          this.$router.push("/post");
         })
         .catch((error) => {
           console.log(error);

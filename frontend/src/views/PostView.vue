@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import PostRoutes from "@/services/auth-post";
+import PostRoutes from "../services/auth-post";
 
 export default 
 {

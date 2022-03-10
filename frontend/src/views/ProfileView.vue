@@ -64,6 +64,7 @@
 
 <script>
 import userRoutes from "../services/auth-user";
+let testAlert = 0;
 
 export default 
 {
@@ -91,19 +92,25 @@ export default
         /* Suppression de l'utilisateur */
         deletion(id) 
         {
-        let storageUser = JSON.parse(localStorage.getItem("groupomania-user")).userData; let wToken=JSON.parse(localStorage.getItem("groupomania-user")).token
-        id = storageUser.id; console.log("ligne 99 "+storageUser.id);    console.log("wToken "+wToken);
+        let storageUser = JSON.parse(localStorage.getItem("groupomania-user")).userData; //let wToken=JSON.parse(localStorage.getItem("groupomania-user")).token
+        id = storageUser.id; //console.log("ligne 99 "+storageUser.id);    console.log("wToken "+wToken);
         
             userRoutes.delete(id)
             .then(() => 
             {
                 localStorage.clear(); 
+                if (testAlert === 0) 
+                {
+                   alert("user " +id+ " supprimé"); 
+                   testAlert ++;
+                }
+                // console.log("Compte supprimé !")
                 this.$router.push("/connexion");
-                console.log("Compte supprimé !");alert("user " +id+ " supprimé");
+                
             })
             .catch((error) => 
             {
-                console.log(error); console.log("Votre compte n'a pas été supprimé! " +storageUser.id); console.log("mdp " +storageUser.uPassword); console.log("token "+storageUser.token);
+                console.log(error); alert("Votre compte n'a pas été supprimé! " +storageUser.id); //console.log("Votre compte n'a pas été supprimé! " +storageUser.id); console.log("mdp " +storageUser.uPassword); console.log("token "+storageUser.token);
             });        
         
         },
