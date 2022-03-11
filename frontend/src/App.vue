@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <nav>
-      <router-link to="/">Accueil</router-link> 
-      <router-link v-if="this.login === true" to="/profil">Profile</router-link>
-      <router-link v-if="this.login === true" to="/ajoutpost">AddPost</router-link>
-      <router-link v-if="this.login === true" to="/post">AllPosts</router-link>
-      <router-link to="/connexion">Login</router-link>
-      <router-link to="/inscription">Signup</router-link>
-      <div id="logout" @click="logout">Logout</div>
+      <ul>
+        <li v-if="CurrentUser"><router-link  to="/">Accueil</router-link></li> 
+        <li v-if="CurrentUser"><router-link to="/profil">Profile</router-link></li>
+        <li v-if="CurrentUser"><router-link  to="/ajoutpost">AddPost</router-link></li>
+        <li v-if="CurrentUser"><router-link  to="/post">AllPosts</router-link></li>
+        <li v-if="!CurrentUser"><router-link  to="/connexion">Login</router-link></li>
+        <li v-if="!CurrentUser"><router-link to="/inscription">Signup</router-link></li>
+        <li v-if="CurrentUser"><div id="logout" @click="logout" >Logout</div></li>
+      </ul>
     </nav>
     <router-view/>
   </div>
@@ -17,12 +19,26 @@
 
 export default {
   name: 'App',
-  methods: {
-  logout() {
-    localStorage.clear();
-    this.$router.push("/connexion") // écran de login
+  data() {
+    return {
     }
   },
+  computed: {
+    CurrentUser() {
+      return this.$store.state.auth.user
+    }
+  },
+  methods: {
+  logout() {
+    this.$store.dispatch("auth/logout");
+    this.$router.push("/connexion"); // écran de login
+    }
+  },
+  mounted() { // pour bloquer sur l'écran de connexion
+    if (!this.CurrentUser) {
+      this.$router.push("/connexion");
+    }
+  }
 }
 </script>
 
@@ -35,20 +51,32 @@ export default {
   color: #2c3e50;
 }
 
-nav {
+ul{
   padding: 30px;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-evenly; 
   /*border: 1px solid red;*/
+  text-decoration: none;
+  list-style-type: none;
 }
+  
 
-nav a {
+ul a {
   font-weight: bold;
   /*color: #2c3e50;*/color: #000000;
+  text-decoration: none;
+  list-style-type: none;
 }
 
-nav a.router-link-exact-active {
+ul a li {
+  font-weight: bold;
+  /*color: #2c3e50;*/color: #000000;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+ul a.router-link-exact-active {
   color: #4341c7;
 }
 
@@ -70,6 +98,12 @@ font-weight: bold;
 @media screen and (max-width: 535px)
 {
   nav 
+  {
+    flex-direction: column;
+    padding: 2px;
+    margin: 0 auto;
+  }
+  ul
   {
     flex-direction: column;
     padding: 2px;

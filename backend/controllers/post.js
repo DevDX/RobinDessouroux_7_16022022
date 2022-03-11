@@ -9,12 +9,14 @@ const Message = db.message;
 
 exports.createPost  = (req, res, next) => {   
   // sequelize début
+  console.log(req.body);
   Post.create({
       // req.params. ou req.body.  ?  à vérifier rdx
       postTitle : req.body.postTitle,           
       postContent : req.body.postContent,
       //inutile postOwner : req.body.postOwner, // userid ou req.body.postOwner à vérifier rdx
       postOwner : req.body.postOwner,
+      userId: req.body.userId,
       //postImageUrl :   `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  //  à vérifier rdx
       postImageUrl : ""
     })

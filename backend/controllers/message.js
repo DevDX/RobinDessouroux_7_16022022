@@ -7,13 +7,11 @@ const Message = db.message;
 exports.createMessage  = (req, res, next) => {   
   // sequelize début
   Message.create({
-      // req.params. ou req.body.  ?  à vérifier rdx
-      messageLink : req.body.messageLink,           
+      // req.params. ou req.body.  ?  à vérifier rdx    
       messageContent : req.body.messageContent,
       messageOwner : req.body.messageOwner, // userid ou req.body.messageOwner à vérifier rdx
       //messageOwner : "",
       //messageImageUrl :   `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  //  à vérifier rdx
-      messageImageUrl : "",
       postId : req.body.postId
       
     })
@@ -105,42 +103,6 @@ exports.getOneMessage = (req, res, next) => {
 };
 
   
-
-exports.getAllMessages = (req, res, next) => {
-  /*Message.find()
-    .then((messages) => {
-      res.status(200).json(messages);
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error
-      });
-    });*/
-  // sequelize début
-  /* selon https://www.tabnine.com/code/javascript/functions/sequelize/Model/findAll */
-  Message.findAll({attributes: 
-    ['id',
-     `messageLink` ,
-     `messageContent` ,
-     `messageOwner` ,
-     `messageImageUrl` ,
-     `createdAt` ,
-     `updatedAt`,
-     `postId` 
-   ],})  
-    .then((messages) => {
-      // test rdx 24/02/2022 res.status(200).json({messages: 'Objets sequelize retrouvés !'}); 
-      res.status(200).json({messages: messages}); // test 24/02/2022 rdx
-    })
-    .catch((error) => {
-      res.status(400).json({
-        error: error
-      });
-    });
-  // sequelize fin    
-};
-
-
 /* Attention, pas utilisé pour l'instant !!! rdx */
 // cas des likes et dislikes
 exports.likeDislike = (req, res, next) => { 

@@ -11,22 +11,6 @@
         
             <header> 
                 <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
-                <!--h1>Bienvenue sur le réseau social d'entreprise de Groupomania.</h1>
-                <h2>Rejoignez notre Communauté.</h2-->
-
-            <!--div class="FlexElt"> 
-                <nav>
-                    <ul>
-                        <li>
-                            <router-link class="link" to="/"><p>Accueil</p></router-link>
-                        </li>
-                        <li>
-                            <router-link to="/" @click="logout" class="link"><p>Deconnexion</p></router-link> 
-                        </li>
-                    </ul>
-                </nav>
-            </div-->
-
             </header>
 
             <section>
@@ -38,12 +22,12 @@
                   <div id="post">
                       <h2>Titre de votre publication</h2>
                       <br>
-                      <textarea name="title" type="text" required v-model="postTitle" id="title"></textarea>
+                      <textarea name="title" type="text" required v-model="post.title" id="title"></textarea>
                       <br><br>
 
                       <h3>Saisissez le contenu de votre article</h3>
                       <br>
-                      <textarea required = "true" type="text" id="content" v-model="postContent"  name="content">
+                      <textarea required = "true" type="text" id="content" v-model="post.content"  name="content">
                       </textarea>
                       <br><br><br>
 
@@ -66,28 +50,31 @@ export default {
   data() {
     return {
       post: {
-        id: null,
         title: "",
-        content: ""
+        content: ""    
       },
       submitted: false
     };
   },
+  computed: {
+    CurrentUser() {
+      return this.$store.state.auth.user
+    }
+  },
   methods: {
     //Fonction qui permet la création d'un article tout en récupérant 
-    //l'id de l'utilisateur issue du localStorage
-    publishpost() {
-      let  userData= JSON.parse(localStorage.getItem("groupomania-user")).userData 
+    
+    publishPost() {    
 
       //variable contentant un objet avec le titre, contenu et l'id de l'utilisateur
       //Utilisation de this. pour récup le data du post
       const data = {
-        title: this.postTitle,
-        content: this.postContent,
-        userId: userData.id // vérifier si utile ? peut être créé automatiquement ?
+        postTitle: this.post.title,
+        postContent: this.post.content,
+        userId: this.CurrentUser.userData.id,
+        postOwner: this.CurrentUser.userData.uName 
       };
-
-      // PostRoutes (axios) 
+      console.log(data);
       PostRoutes.create(data)
         .then(() => {
           this.submitted = true;
@@ -96,7 +83,7 @@ export default {
         })
         .catch((error) => {
           console.log(error);
-        });
+       });
     },
 
     //Déconnexion en retirant du localStorage l'utilisateur 

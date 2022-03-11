@@ -23,10 +23,10 @@
                                         
                             <div class="container">
                                 <label for="user-profil">Profil :</label>
-                                <select name="user-profil" id="user-profil">
-                                    <option value="">--SVP, sélectionnez votre profil</option>
-                                    <option value="user">Utilisateur</option>
-                                    <option value="admin">Administrateur</option>  
+                                <select v-model="isadmin" name="user-profil" id="user-profil">
+                                    <option disabled value="">--SVP, sélectionnez votre profil</option>
+                                    <option value=false>Utilisateur</option>
+                                    <option value=true>Administrateur</option>  
                                 </select>
                             </div>
                             <br> 
@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default 
 {
@@ -72,25 +71,27 @@ export default
     // Récupération de data grâce aux v-model 
     data() 
     {
-        return {email: "",password: "", nom: "", prenom: ""};
+        return {email: "",password: "", nom: "", prenom: "", isadmin: false};
     },
     // utilisation d'axios pour envoi des données 
     methods: 
     {
         signup() 
         {
-            let self=this;
-            axios.post("http://localhost:3000/api/auth/signup", { uEmail: this.email, uPassword: this.password, uName: this.nom, uFirstname: this.prenom })   // semblable à Postman 
-            // Création et enregistrement des données dans localStorage 
-            // et affichage de l'écran de login
-            .then(() => 
-            {
-                self.$router.push("/connexion");
-            })
-            .catch((error) => 
-            {
+            let user = {
+                uEmail: this.email,
+                uPassword: this.password,
+                uName: this.nom,
+                uFirstname: this.prenom,
+                uIsadmin: this.isadmin
+            }
+            console.log(this.isadmin);
+            this.$store.dispatch("auth/register",user)
+            .then(() => {
+             this.$router.push("/connexion")
+            }, (error)=> {
                 console.log(error);
-            });
+            })
         },
     },
 };

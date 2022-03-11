@@ -3,25 +3,16 @@ import axios from "./http-common";
 class MessageRoutes {
   create(data) {
     const token = JSON.parse(localStorage.getItem("groupomania-user")).token
-    return axios.post(`/post/:id`, data, {
+    return axios.post(`/message`, data, {
       headers: {
         authorization: `Bearer ${token}`
       }
     })
   }
 
-  getAll() {
+  delete(id) {
     const token = JSON.parse(localStorage.getItem("groupomania-user")).token
-    return axios.get(`/post/:id`,  {
-      headers: {
-        authorization: `Bearer ${token}`
-      }
-    })
-  }
-
-  delete(post, message) {
-    const token = JSON.parse(localStorage.getItem("groupomania-user")).token
-    return axios.delete('/post/' + post + '/message/' + comment, {
+    return axios.delete('/message/'+id , {
       headers: {
         authorization: `Bearer ${token}`
       }

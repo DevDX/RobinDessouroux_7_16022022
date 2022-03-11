@@ -22,46 +22,23 @@ module.exports = (sequelize, Sequelize) => {
                 primaryKey:true
             },
       
-            // Column-2, link
-            messageLink: 
-            { 
-                type: Sequelize.INTEGER, 
-                allowNull:false, 
-                /*references: 
-                {
-                    model: 'post',
-                    key: 'post_id',
-                    onDelete: 'CASCADE'
-                } */
-            },
-        
-            // Column-3, content
+            
+            // Column-2, content
             messageContent: 
             { 
                 type: Sequelize.STRING, 
                 allowNull:false 
             },
         
-            // Column-4, owner
+            // Column-3, owner
             messageOwner: 
             { 
-                type: Sequelize.INTEGER, 
-                //unique: true,
-                //allowNull:false,
-                /*references: 
-                {
-                    model: 'user',
-                    key: 'u_id',
-                    onDelete: 'CASCADE'
-                } */
+                type: Sequelize.STRING, 
+                allowNull:false,
+               
             },
 
-            // Column-5, message picture
-            messageImageUrl: 
-            { 
-                type: Sequelize.STRING     //  l'URL de l'image du message
-            }
-
+          
            
         },
 

@@ -42,7 +42,8 @@ exports.signup = (req, res, next) => {
         uEmail: Joi.string().regex(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).required(),//.error(new Error('email incorrect !')),
         uPassword: Joi.string().required(),
         uFirstname: Joi.string().required(),
-        uName: Joi.string().required()
+        uName: Joi.string().required(),
+        uIsadmin: Joi.boolean().required()
     })
       
 // const { value, error } = schema.validate(req.body);
@@ -58,7 +59,8 @@ else {
                                                 uEmail: req.body.uEmail,
                                                 uPassword: hash,
                                                 uFirstname: req.body.uFirstname,
-                                                uName: req.body.uName
+                                                uName: req.body.uName,
+                                                uIsadmin: req.body.uIsadmin
                                             });
                                         user.save()
                                         .then(() => res.status(201).json({ message: 'Utilisateur créé !' }))
@@ -121,7 +123,7 @@ exports.login = (req, res, next) => {
     })
     /*.catch(error => res.status(500).json({ error }));*/
     /*.catch(error => { console.log("Utilisateur non trouvé !");  }); 09/03/2022 */
-    .catch(error => res.status(404).json({ error: 'Utilisateur sequelize non trouvé' }))
+    .catch(error => res.status(500).json({ error: 'Utilisateur sequelize non trouvé' }))
     /*if(!user) {
         return res.status(401).json({ error : 'Utilisateur non trouvé !' });
     };*/

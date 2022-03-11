@@ -17,7 +17,7 @@
                 <h1>Bonjour {{ this.prenom }} </h1>
 
                 <section id="signup-form">
-                    <form id="form_1" v-on:click.prevent="deletion"> 
+                    <form id="form_1" v-on:submit.prevent="deletion"> 
                         <fieldset class="FlexElt">
                             <legend>Mon Profil</legend> 
                             <legend>Informations personnelles</legend>
@@ -43,18 +43,11 @@
                             <br> 	                            
                             <!-- j'ai supprimé la modification du password -->
                             <!--button id="validation "class="group-button" type="submit">Validation</button-->
-                            <button id="deletion" class="group-button" type="submit" @click="deletion" >Suppression</button>
+                            <button id="deletion" class="group-button" type="submit" >Suppression</button>
                         </fieldset>
                     </form>
                 </section>
 
-                <!--nav> 
-                    <ul>
-                    <li>
-                        <router-link class="link" to="/accueil"><p>Accueil</p></router-link>
-                    </li>
-                    </ul>
-                </nav-->
             </section>
 
         </div>
@@ -75,7 +68,7 @@ export default
         return {email: "", nom: "", prenom: "", profil: "", id: ""};
     },
     // récupération des données depuis le ls
-    mounted: function() {
+    mounted: function() {  
     let  userData= JSON.parse(localStorage.getItem("groupomania-user")).userData 
     /*console.log(userData);*/
     this.email=userData.uEmail,
@@ -98,7 +91,7 @@ export default
             userRoutes.delete(id)
             .then(() => 
             {
-                localStorage.clear(); 
+                this.$store.dispatch("auth/logout")
                 if (testAlert === 0) 
                 {
                    alert("user " +id+ " supprimé"); 

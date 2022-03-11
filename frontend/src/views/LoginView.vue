@@ -49,7 +49,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default 
 {
@@ -63,20 +62,16 @@ export default
     {
         login() 
         {
-            axios.post("http://localhost:3000/api/auth/login", { uEmail: this.email, uPassword: this.password })  // semblable à Postman 
-                   
-            .then((res) => 
-            {
-                localStorage.setItem("groupomania-user", JSON.stringify(res.data)); // création et enregistrement des données dans localStorage 
-                //this.$router.push("post");  // affichage des articles contenus dans la table post
-                this.$router.push("/profil");  // affichage des articles contenus dans la table post
-            })
-            .catch((error) => 
-            {   //this.errorMessage = error.message;
-                //console.error("There was an error!", this.errorMessage);
-                alert("erreur pour cet utilisateur et ce mot de passe");
-                console.log(error);      
-            });
+            let user =  {
+                uEmail: this.email,
+                uPassword: this.password
+            }
+            this.$store.dispatch("auth/login",user)
+            .then(()=> {
+                this.$router.push("/profil")
+            }, (error) => {
+                console.log(error);
+            })  
         },
     },
 };

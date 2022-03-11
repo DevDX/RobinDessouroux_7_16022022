@@ -11,8 +11,6 @@
         <div class="all-posts">
             <header> 
                 <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
-                <!--h1>Bienvenue sur le réseau social d'entreprise de Groupomania.</h1>
-                <h2>Rejoignez notre Communauté.</h2-->
             </header>
 
             <h1>Tous les articles</h1>
@@ -22,22 +20,37 @@
 
             <!-- Liste des articles, relié grâce à une boucle for
             Afficher l'objet post dans le tableau posts -->
-            <ul id="list-container">
-              <li id="post" v-for="post in posts" :key="post">
-                  <h2>{{ post.postTitle }}</h2>
-                  <div id="post-content">{{ post.postContent }}</div>
-                  <div id="published"> Publié le {{ post.createdAt }} par {{ post.postOwner }}</div> <!-- à ajouter {{ post.uFirstname }} {{ post.uNname }}-->
-                  <div v-for="message in post.messages" :key="message">
+            <div id="list-container">
+
+              <div id="post-container" v-for="post in posts" :key="post">
+                  <div id="post-detail">
+                    <h2>{{ post.postTitle }}</h2>
+
+                    <div id="post-content">{{ post.postContent }}</div>
+                    
+                    <div id="published"> Publié le {{ post.createdAt.split("T")[0] + " " + post.createdAt.split("T")[1].split(".")[0] }} par {{ post.postOwner }}</div> 
+                  
+                    <button class="button-delete" v-if="CurrentUser.userData.id == post.userId || CurrentUser.userData.uIsadmin == true " @click="deletePost(post.id)">supprimer</button>
+                    <button  @click="this.activecomment=1, this.currentcomment=post.id">commenter</button>
+                    <textarea class="content" v-model="this.commentcontent" @keyup.enter="createcomment(post.id)" v-if="this.activecomment == 1 && this.currentcomment == post.id"></textarea> <!-- trigger sur enter -->
+                  </div>  
+                  
+                  <div id="message" v-for="message in post.messages" :key="message">
                     <p> {{message.messageContent}} </p>
+                    <div id="msg-published"> Publié le {{ message.createdAt.split("T")[0] + " " + message.createdAt.split("T")[1].split(".")[0] }} par {{ message.messageOwner }}</div>  
+                    <button class="button-delete" v-if="CurrentUser.userData.uName == message.messageOwner || CurrentUser.userData.uIsadmin == true " @click="deleteComment(message.id)">supprimer</button>
                   </div>
-              </li>
-            </ul>
+                  
+              </div>
+
+            </div>
         </div>
     </body> 
 </html>   
 </template>
 
 <script>
+import MessageRoutes from "../services/auth-message";
 import PostRoutes from "../services/auth-post";
 
 export default 
@@ -45,10 +58,52 @@ export default
   name: "AllPosts",
   data() 
   {
-    return {  posts: [] }; //La liste d'articles est dans un tableau contenant plusieurs objets post        
+    return {  posts: [], activecomment: 0, commentcontent: "" , currentcomment: 0}; //La liste d'articles est dans un tableau contenant plusieurs objets post        
+  },
+  computed: {
+    CurrentUser() {
+      return this.$store.state.auth.user
+    }
   },
   methods: 
   {
+    deleteComment(id){
+      MessageRoutes.delete(id)
+      .then(() => {
+        this.retrievePosts()
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    },
+    createcomment(id) {
+      let data = {
+      messageContent: this.commentcontent,
+      messageOwner: this.CurrentUser.userData.uName,
+      postId: id,
+      }
+      console.log(data);
+      MessageRoutes.create(data)
+      .then(() => {
+        this.retrievePosts();
+        this.activecomment=0;
+        this.commentcontent="";
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    } ,
+    deletePost(id)
+   {
+     PostRoutes.delete(id)
+     .then(() => {
+       this.retrievePosts();
+     })
+     .catch((error) =>
+     {
+       console.log(error);
+     })
+   }, 
     // Récupération des données des posts 
     retrievePosts() 
     {
@@ -124,6 +179,15 @@ h1
   text-align: center;
   /*border: 2px solid red;*/
 } 
+h2 
+{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;  
+  text-align: center; 
+  margin: 10px auto;
+}
 .link 
 {    
   /*margin-left: auto; /* à vérifier rdx */
@@ -147,15 +211,21 @@ h1
 }
 /*.link*/ p 
 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
   text-align: center;
   align-self: center;
   /*margin: 10px auto;*/ margin: auto;
-  padding: 5px; 
+  padding: 1px; 
+  max-width: 348px;
+  
 }
-p:hover
+/*p:hover
 {
 color: #ffffff; transition: all .3s ease-in-out;
-}
+}*/
 .link:hover
 {
   background-color: #000000;
@@ -172,29 +242,94 @@ color: #ffffff; transition: all .3s ease-in-out;
   margin-right: auto;
   margin-left: auto;
 }
-#post 
+#post-container 
 {
   border-radius: 15px;
   /*background-color: rgb(195, 233, 223);*/
-  background-color: #ffb233;  
+  /*background-color: #ffb233;*/  
   margin: 20px auto;
   padding: 20px;
-  /*width: 300px;*/ min-width:280px;
-  overflow: hidden;
+  /*width: 300px;*/
+  min-width:280px;
+  overflow: hidden; 
+  /* début test rdx 11/03/2022 */
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  /*border: 1px solid #000000;*/  
+  box-shadow: 0 0 6px #000000; 
+  /* fin test rdx 11/03/2022 */
+}
+#post-detail
+{
+  border: 1px solid #000000;
+  border-radius: 10px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  max-width: 348px;
+  min-width: 280px;
 }
 #post-content 
 {
   text-overflow: ellipsis; 
   overflow: hidden;
-  margin-bottom: 20px;
-  white-space: nowrap;
+  margin: 0 auto 20px auto;
+  /*white-space: nowrap;*/
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  max-width: 348px;
+  min-width: 280px;
+
+
+}
+#message
+{
+  border-radius: 15px;
+  border: 1px solid #000000;
+  background-color: #ffb233;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 4px;
+  font-size: 18px;
+  margin: 2px auto 2px auto;
+  max-width: 348px;
+  min-width: 280px;
+}
+.content
+{
+    font-size: 16px;
+    margin-right: auto;
+    margin-left:auto;
+    resize : both;
+    min-width : 280px;
+    min-height : 75px;
+    max-width : 375px;
+    max-height : 400px;
+}
+#msg-published
+{
+  margin-top: 10px;
 }
 #link-to-article 
 {
   border: 1px solid #000000;
   border-radius: 5px;
   padding: 10px;
-  color: #000000;box-shadow: 0 0 4px black;
+  color: #000000;
+  box-shadow: 0 0 4px black;
   font-weight: bold;    
 }
 #link-to-article:hover
@@ -205,6 +340,33 @@ color: #ffffff; transition: all .3s ease-in-out;
 }    
 #published 
 { 
-  margin: 20px;
+  margin: 2px auto 10px auto;
+  padding: 1px;
+}
+button
+{
+  color:#000000;font-weight: bold;
+  background-color: #ffb233;  
+  height:35px; width: 125px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;  
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;  
+  border: 1px solid #000000;
+  font-size: 18px; 
+  box-shadow: 0 0 4px black;
+  /*margin-top:15px;*/ margin: 5px auto 10px auto;
+}
+button:hover
+{
+    background-color: #000000;
+    color: #ffffff; 
+    transition: all .3s ease-in-out;
+}
+.button-delete:hover
+{
+  background-color: #5e035b;  
+  color: #ffffff; 
+  transition: all .3s ease-in-out;  
 }
 </style>
