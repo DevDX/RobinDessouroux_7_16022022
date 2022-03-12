@@ -210,16 +210,15 @@ h2
   flex-direction: row;justify-content: center; align-content: center;
 }
 /*.link*/ p 
-{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  text-align: center;
-  align-self: center;
+{  
+  /*text-align: center;*/
+  /*align-self: center;*/
   /*margin: 10px auto;*/ margin: auto;
   padding: 1px; 
-  max-width: 348px;
+  /*max-width: auto;*/
+  /*max-width: 348px;*/
+  min-width: 280px;
+  border:solid lightseagreen;
   
 }
 /*p:hover
@@ -244,24 +243,24 @@ color: #ffffff; transition: all .3s ease-in-out;
 }
 #post-container 
 {
-  border-radius: 15px;
   /*background-color: rgb(195, 233, 223);*/
   /*background-color: #ffb233;*/  
   margin: 20px auto;
-  padding: 20px;
+  padding: 10px;
   /*width: 300px;*/
-  min-width:280px;
+  min-width:280px; /*max-width: 750px;*/ 
   overflow: hidden; 
   /* début test rdx 11/03/2022 */
   display:flex;
   flex-direction: column;
   justify-content: center;
   align-content: center;
+   flex-wrap: wrap;
   background-color: #ffffff;
   border-radius: 10px;
   /*border: 1px solid #000000;*/  
   box-shadow: 0 0 6px #000000; 
-  /* fin test rdx 11/03/2022 */
+  /* fin test rdx 11/03/2022 */border:  solid greenyellow;
 }
 #post-detail
 {
@@ -272,15 +271,18 @@ color: #ffffff; transition: all .3s ease-in-out;
   justify-content: center;
   align-content: center;
   flex-wrap: wrap;
-  max-width: 348px;
+  /*max-width: 348px;*/
   min-width: 280px;
+  margin: 20px auto;
+  border:  solid yellow;
 }
 #post-content 
 {
-  text-overflow: ellipsis; 
+  /*text-overflow: ellipsis; */
   overflow: hidden;
   margin: 0 auto 20px auto;
   /*white-space: nowrap;*/
+
 
   display:flex;
   flex-direction: column;
@@ -289,8 +291,7 @@ color: #ffffff; transition: all .3s ease-in-out;
   flex-wrap: wrap;
   max-width: 348px;
   min-width: 280px;
-
-
+  border:  solid pink;
 }
 #message
 {
@@ -300,13 +301,15 @@ color: #ffffff; transition: all .3s ease-in-out;
   display:flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
+  /*align-content: center;*/
   flex-wrap: wrap;
   padding: 4px;
   font-size: 18px;
   margin: 2px auto 2px auto;
-  max-width: 348px;
+  /*max-width: 348px;*/
+  /*max-width: 348px;*/
   min-width: 280px;
+  border:  solid blue;
 }
 .content
 {
