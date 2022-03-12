@@ -83,6 +83,9 @@ export default
     margin: 15px auto;
     font-weight: bold;
     align-items: center;
+}
+fieldset
+{
     border-radius: 10px;
 }
 .group-button

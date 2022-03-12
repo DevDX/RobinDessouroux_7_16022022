@@ -36,7 +36,6 @@
 
 <script>
 import userRoutes from "../services/auth-user";
-let testAlert = 0;
 
 export default 
 {
@@ -70,15 +69,10 @@ export default
             userRoutes.delete(id)
             .then(() => 
             {
-                this.$store.dispatch("auth/logout")
-                if (testAlert === 0) 
-                {
-                   alert("user " +id+ " supprimé"); 
-                   testAlert ++;
-                }
+                this.$store.dispatch("auth/logout");
+                alert("user " +id+ " supprimé"); 
                 // console.log("Compte supprimé !")
                 this.$router.push("/connexion");
-                
             })
             .catch((error) => 
             {

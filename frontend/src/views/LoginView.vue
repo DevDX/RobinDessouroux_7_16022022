@@ -64,6 +64,9 @@ export default
     max-width: 275px;
     margin: 15px auto;
     font-size: 18px; 
+}
+fieldset
+{
     border-radius: 10px;
 }
 .group-button

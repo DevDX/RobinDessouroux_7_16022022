@@ -5,7 +5,8 @@
 
             <div id="list-container">
 
-              <div id="post-container" v-for="post in posts" :key="post">
+              <!--div id="post-container" v-for="post in posts" :key="post"-->
+              <div id="post-container" v-for="post in posts.slice().reverse()" :key="post">
                   <div id="post-detail">
                     <h2>Titre: {{ post.postTitle }}</h2>
 
