@@ -1,52 +1,38 @@
 <template>
-<!--DOCTYPE html-->
-<html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <title>Groupomania réseau social interne</title> 
-        <link rel="shortcut icon" href="../images/icon.svg"/>
-    </head>
-
-    <body>
+  <body>
         <div class="all-posts">
-            <header> 
-                <img id="logo-groupomania-black" src="../images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
-            </header>
+           <h1>Tous les articles</h1>
 
-            <h1>Tous les articles</h1>
-
-            <!-- Page fil d'actualité : on charge une liste d'articles vertical avec
-            Nom et Prénom de l'auteur, date de publication, Titre & premiers mots du contenu. -->
-
-            <!-- Liste des articles, relié grâce à une boucle for
-            Afficher l'objet post dans le tableau posts -->
             <div id="list-container">
 
               <div id="post-container" v-for="post in posts" :key="post">
                   <div id="post-detail">
-                    <h2>{{ post.postTitle }}</h2>
+                    <h2>Titre: {{ post.postTitle }}</h2>
 
                     <div id="post-content">{{ post.postContent }}</div>
                     
                     <div id="published"> Publié le {{ post.createdAt.split("T")[0] + " " + post.createdAt.split("T")[1].split(".")[0] }} par {{ post.postOwner }}</div> 
-                  
-                    <button class="button-delete" v-if="CurrentUser.userData.id == post.userId || CurrentUser.userData.uIsadmin == true " @click="deletePost(post.id)">supprimer</button>
-                    <button  @click="this.activecomment=1, this.currentcomment=post.id">commenter</button>
-                    <textarea class="content" v-model="this.commentcontent" @keyup.enter="createcomment(post.id)" v-if="this.activecomment == 1 && this.currentcomment == post.id"></textarea> <!-- trigger sur enter -->
+
+                    <div class="post-button">
+                      <button class="button-delete" v-if="CurrentUser.userData.id == post.userId || CurrentUser.userData.uIsadmin == true " @click="deletePost(post.id)">supprimer</button>
+                      <button  @click="this.activecomment=1, this.currentcomment=post.id">commenter</button>
+                    </div>
+                    <textarea class="content" v-model="this.commentcontent" @keyup.enter="createcomment(post.id)" @keyup.esc="this.activecomment=0" v-if="this.activecomment == 1 && this.currentcomment == post.id"></textarea> <!-- trigger sur enter -->
                   </div>  
                   
-                  <div id="message" v-for="message in post.messages" :key="message">
-                    <p> {{message.messageContent}} </p>
-                    <div id="msg-published"> Publié le {{ message.createdAt.split("T")[0] + " " + message.createdAt.split("T")[1].split(".")[0] }} par {{ message.messageOwner }}</div>  
-                    <button class="button-delete" v-if="CurrentUser.userData.uName == message.messageOwner || CurrentUser.userData.uIsadmin == true " @click="deleteComment(message.id)">supprimer</button>
+                  <div class="msg-container">
+                    <div id="message" v-for="message in post.messages" :key="message">
+                      <p class="msg-content"> {{message.messageContent}} </p>
+                      <div id="msg-published"> Publié le {{ message.createdAt.split("T")[0] + " " + message.createdAt.split("T")[1].split(".")[0] }} par {{ message.messageOwner }}</div>  
+                      <button class="button-delete" v-if="CurrentUser.userData.uName == message.messageOwner || CurrentUser.userData.uIsadmin == true " @click="deleteComment(message.id)">supprimer</button>
+                    </div>
                   </div>
                   
               </div>
 
             </div>
         </div>
-    </body> 
-</html>   
+  </body>  
 </template>
 
 <script>
@@ -125,7 +111,7 @@ export default
     logout() 
     {
       localStorage.removeItem("groupomania-user");
-      this.$router.push("connexion"); // à vérifier si acceptable, c'est retour vers la page de connexion
+      this.$router.push("/connexion"); // à vérifier si acceptable, c'est retour vers la page de connexion
     },
   },
   // La fonction qui affiche les articles est montée dans le DOM
@@ -137,48 +123,7 @@ export default
 </script>
 
 <style scoped >
-* 
-{
-  text-decoration: none;list-style-type: none; font-family: arial;  color: #000000;
-}
-body,img,header,ul,li
-{
-  margin: 0;
-  padding: 0;
-}  
-header 
-{
-  display: flex;
-  /*flex-direction: row;*/ flex-direction:column;
-  justify-content: center;
-  background-color: #ffb233;
-  align-items: center;
-  flex-wrap: wrap;
-  min-width:280px;
-  margin-right:auto;
-  margin-left: auto;
-}
-/*#header*/ #logo-groupomania-black 
-{
-  max-width: 170px;height:170px;    
-  padding: 0;
-  margin: 5px auto;
-}  
-h1 
-{
-  background-color: #ffb233;
-  border-radius: 10px;
-  padding: 20px; /* à vérifier rdx */
-  /*margin: 10px 80px;*/
-  margin: 10px auto;
-  font-size: 30px;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;  
-  text-align: center;
-  /*border: 2px solid red;*/
-} 
+
 h2 
 {
   display:flex;
@@ -188,159 +133,73 @@ h2
   text-align: center; 
   margin: 10px auto;
 }
-.link 
-{    
-  /*margin-left: auto; /* à vérifier rdx */
-  /*margin-left:0;*/
-  /*margin-right:auto; /* à vérifier rdx */
-  margin: 5px auto;
-  padding: 5px;
-  /*padding-right: 10px;*/
-  font-size: 16px; /*font-size: 20px;*/ 
-  font-weight: bold;
-  color: #000000;
-  border-radius: 10px;
-  background-color: #ffb233;
-  height: 30px; /*width:100%;*/width:175px;
-  align-content: center;
-  /*border: 1px solid;*/  
-  border: 1px solid #000000;
-  box-shadow: 0 0 4px black;
-  display: flex;
-  flex-direction: row;justify-content: center; align-content: center;
-}
-/*.link*/ p 
-{  
-  /*text-align: center;*/
-  /*align-self: center;*/
-  /*margin: 10px auto;*/ margin: auto;
-  padding: 1px; 
-  /*max-width: auto;*/
-  /*max-width: 348px;*/
-  min-width: 280px;
-  border:solid lightseagreen;
-  
-}
-/*p:hover
-{
-color: #ffffff; transition: all .3s ease-in-out;
-}*/
-.link:hover
-{
-  background-color: #000000;
-  /* color: #ffffff; */
-  transition: all .3s ease-in-out;
-}    
 #list-container 
 {
-  list-style-type: none;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin-right: auto;
-  margin-left: auto;
+  gap: 1rem;
 }
 #post-container 
 {
-  /*background-color: rgb(195, 233, 223);*/
-  /*background-color: #ffb233;*/  
-  margin: 20px auto;
-  padding: 10px;
-  /*width: 300px;*/
-  min-width:280px; /*max-width: 750px;*/ 
-  overflow: hidden; 
-  /* début test rdx 11/03/2022 */
-  display:flex;
+  width: 80%;
+  max-width: 40rem;
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
-   flex-wrap: wrap;
-  background-color: #ffffff;
   border-radius: 10px;
-  /*border: 1px solid #000000;*/  
   box-shadow: 0 0 6px #000000; 
-  /* fin test rdx 11/03/2022 */border:  solid greenyellow;
 }
 #post-detail
 {
-  border: 1px solid #000000;
-  border-radius: 10px;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  /*max-width: 348px;*/
-  min-width: 280px;
-  margin: 20px auto;
-  border:  solid yellow;
+  align-items: center;
+  padding-bottom: 0.5rem;
 }
 #post-content 
 {
-  /*text-overflow: ellipsis; */
-  overflow: hidden;
-  margin: 0 auto 20px auto;
-  /*white-space: nowrap;*/
-
-
-  display:flex;
+  margin: 10px;
+  border: solid 1px #000000;
+  border-radius: 5px;
+  overflow-wrap: break-word;
+  width: 90%;
+}
+.post-button
+{
+  gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.msg-container
+{
+  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  max-width: 348px;
-  min-width: 280px;
-  border:  solid pink;
+  align-items: center;
 }
 #message
 {
   border-radius: 15px;
   border: 1px solid #000000;
-  background-color: #ffb233;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  /*align-content: center;*/
-  flex-wrap: wrap;
+  background-color: rgba(233, 231, 231, 0.219);
   padding: 4px;
-  font-size: 18px;
-  margin: 2px auto 2px auto;
-  /*max-width: 348px;*/
-  /*max-width: 348px;*/
-  min-width: 280px;
-  border:  solid blue;
+  width: 90%;
+  margin-bottom: 0.5rem; 
 }
 .content
 {
-    font-size: 16px;
-    margin-right: auto;
-    margin-left:auto;
-    resize : both;
-    min-width : 280px;
-    min-height : 75px;
-    max-width : 375px;
-    max-height : 400px;
+  min-width : 280px;
+  padding-bottom: 0.5rem;
 }
 #msg-published
 {
   margin-top: 10px;
 }
-#link-to-article 
+.msg-content
 {
-  border: 1px solid #000000;
-  border-radius: 5px;
-  padding: 10px;
-  color: #000000;
-  box-shadow: 0 0 4px black;
-  font-weight: bold;    
+  overflow-wrap: break-word;
 }
-#link-to-article:hover
-{
-  background-color: #000000;
-  color: #ffffff;
-  transition: all .3s ease-in-out;
-}    
 #published 
 { 
   margin: 2px auto 10px auto;
@@ -348,23 +207,17 @@ color: #ffffff; transition: all .3s ease-in-out;
 }
 button
 {
-  color:#000000;font-weight: bold;
   background-color: #ffb233;  
-  height:35px; width: 125px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;  
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;  
+  border-radius: 10px;
   border: 1px solid #000000;
-  font-size: 18px; 
   box-shadow: 0 0 4px black;
-  /*margin-top:15px;*/ margin: 5px auto 10px auto;
+  margin: 5px auto 10px auto;
 }
 button:hover
 {
-    background-color: #000000;
-    color: #ffffff; 
-    transition: all .3s ease-in-out;
+  background-color: #000000;
+  color: #ffffff; 
+  transition: all .3s ease-in-out;
 }
 .button-delete:hover
 {

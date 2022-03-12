@@ -11,6 +11,9 @@
         <li v-if="CurrentUser"><div id="logout" @click="logout" >Logout</div></li>
       </ul>
     </nav>
+    <header> 
+      <img id="logo-groupomania-black" src="./images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
+    </header> 
     <router-view/>
   </div>
 </template>
@@ -48,7 +51,42 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+}
+
+* {
+  text-decoration: none;
+  list-style-type: none;
+  font-family: arial;
+  color: #000000;
+}
+
+body,img,header,ul,li {
+  margin: 0;
+  padding: 0;
+} 
+
+header {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  background-color: #ffb233;
+  align-items: center;
+}
+
+#logo-groupomania-black 
+{
+  max-width: 170px;
+  height:170px;    
+} 
+
+h1 
+{
+    background-color: #ffb233;
+    min-height: 5rem;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 ul{
@@ -56,24 +94,10 @@ ul{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly; 
-  /*border: 1px solid red;*/
   text-decoration: none;
   list-style-type: none;
-}
-  
-
-ul a {
   font-weight: bold;
-  /*color: #2c3e50;*/color: #000000;
-  text-decoration: none;
-  list-style-type: none;
-}
-
-ul a li {
-  font-weight: bold;
-  /*color: #2c3e50;*/color: #000000;
-  text-decoration: none;
-  list-style-type: none;
+  color: #000000;
 }
 
 ul a.router-link-exact-active {
@@ -84,9 +108,11 @@ ul a.router-link-exact-active {
 border: 1px solid #000000;
 border-radius: 5px;
 background-color: #ffb233;  
-padding: 1px 7px; color: #000000;
+padding: 1px 7px;
+color: #000000;
 font-weight: bold;
 }
+
 #logout:hover
 {
   background-color: #000000;
@@ -97,22 +123,12 @@ font-weight: bold;
 /*@media screen and (max-width: 376px)*/
 @media screen and (max-width: 535px)
 {
-  nav 
-  {
-    flex-direction: column;
-    padding: 2px;
-    margin: 0 auto;
-  }
   ul
   {
     flex-direction: column;
-    padding: 2px;
-  }
-  #logout
-  {
-    padding: 1px 2px;
-    width: 100px;
-    margin: 0 auto 2px auto;
+    align-items: center;
+    padding: 0.2rem;
+    gap: 0.2rem;
   }
 }
 </style>
