@@ -64,6 +64,7 @@ export default
     max-width: 275px;
     margin: 15px auto;
     font-size: 18px; 
+    border-radius: 10px;
 }
 .group-button
 {

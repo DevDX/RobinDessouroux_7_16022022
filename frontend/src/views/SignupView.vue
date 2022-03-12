@@ -83,6 +83,7 @@ export default
     margin: 15px auto;
     font-weight: bold;
     align-items: center;
+    border-radius: 10px;
 }
 .group-button
 {

@@ -112,6 +112,10 @@ textarea
 {
   width: 100%;
   height: 5rem;
+  border-radius: 10px;
+  background-color: rgb(243, 240, 214);
+  border: solid 1px yellow;
+  box-shadow: 0 0px 10px rgb(245, 225, 43);
 }
 #publish-post
 {
