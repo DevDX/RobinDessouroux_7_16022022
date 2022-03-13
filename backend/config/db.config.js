@@ -10,8 +10,6 @@ module.exports = {
     PASSWORD: process.env.DB_PASS,
     //DB: "groupomaniadb",
     DB: process.env.DB_NAME,
-    //port: 30000, à vérifier rdx
-    //port: 3306,
     dialect: "mysql",
     pool: {
       max: 5,

@@ -2,7 +2,7 @@
   <div class="main-container">
     <nav>
       <ul>
-        <li v-if="CurrentUser"><router-link  to="/">Accueil</router-link></li> 
+        <li v-if="CurrentUser"><router-link  to="/">Home</router-link></li> 
         <li v-if="CurrentUser"><router-link to="/profil">Profile</router-link></li>
         <li v-if="CurrentUser && CurrentUser.userData.uIsadmin == true"><router-link to="/adminboard">AdminBoard</router-link></li>
         <li v-if="CurrentUser"><router-link  to="/ajoutpost">AddPost</router-link></li>

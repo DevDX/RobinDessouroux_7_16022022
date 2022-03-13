@@ -2,7 +2,11 @@
     <body>
         <div class="signup">
             <section id="choice">
-                <h1>Bonjour {{ this.prenom }} </h1>
+                <h1>Bonjour {{ CurrentUser.userData.uName }} </h1>
+                <div class="admin" v-for="user in allUser" :key="user.id">
+                    <p v-if="CurrentUser.userData.id != user.id "> {{ user.uEmail }} </p>  
+                    <button v-if="CurrentUser.userData.id != user.id " class="group-button" @click="deletion(user.id)">Suppr.</button>  
+                </div>
             </section>
 
         </div>
@@ -44,20 +48,22 @@ export default
         /* Suppression de l'utilisateur */
         deletion(id) 
         {
-        let storageUser = JSON.parse(localStorage.getItem("groupomania-user")).userData; //let wToken=JSON.parse(localStorage.getItem("groupomania-user")).token
-        id = storageUser.id; //console.log("ligne 99 "+storageUser.id);    console.log("wToken "+wToken);
-        
+                
             userRoutes.delete(id)
             .then(() => 
             {
-                this.$store.dispatch("auth/logout");
-                alert("user " +id+ " supprimé"); 
-                // console.log("Compte supprimé !")
-                this.$router.push("/connexion");
+              userRoutes.getAllUsers()
+                .then((res) =>{
+                    this.allUser = res.data
+                    console.log(this.allUser);
+                }) 
+                .catch((error) => {
+                    console.log(error);
+                }) 
             })
             .catch((error) => 
             {
-                console.log(error); alert("Votre compte n'a pas été supprimé! " +storageUser.id); //console.log("Votre compte n'a pas été supprimé! " +storageUser.id); console.log("mdp " +storageUser.uPassword); console.log("token "+storageUser.token);
+                console.log(error); 
             });        
         
         },
@@ -69,16 +75,32 @@ export default
 
 
 <style scoped >
-
+#choice
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin
+{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    width: 60%;
+    max-width: 20rem;
+    align-items: center;
+    
+}
 .group-button
 {
     font-weight: bold;
     background-color: #ffb233;  
-    height:55px; 
-    width: 150px;
+    height: 20px; 
+    width: 50px;
     border-radius: 10px;
     border: 1px solid #000000;
-    font-size: 20px; 
+    font-size: 10px; 
     box-shadow: 0 0 4px black;
 }
 .group-button:hover

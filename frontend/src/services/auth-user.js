@@ -4,7 +4,7 @@ class UserRoutes
 {      
     getAllUsers() {
       const token = JSON.parse(localStorage.getItem("groupomania-user")).token; //console.log("auth-user token :"+token); 
-      return axios.get('/auth/profils/', {
+      return axios.get('/auth/users/profil', {
         headers: {
           authorization: `Bearer ${token}`
         }
