@@ -12,6 +12,6 @@ router.get('/:id', auth, postCtrl.getOnePost);    //  afficher un post
 router.get('/', auth, postCtrl.getAllPosts);  // afficher tous les posts
 router.delete('/:id', auth, postCtrl.deletePost); // suppression 
 
-router.post('/:id/like', auth, postCtrl.likeDislike);   //cas des likes et dislikes à conserver ou pas ? rdx
+router.post('/:id/like', auth, postCtrl.likeDislike);   //cas des likes et dislikes à conserver ou pas ?  
 
 module.exports = router;  

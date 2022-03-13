@@ -3,13 +3,13 @@ const router = express.Router();
 const userCtrl = require('../controllers/user');
 const password  = require('../middleware/password');
 const multer = require('../middleware/multer-config');
-const auth  = require('../middleware/auth'); // test 10/03/2022
+const auth  = require('../middleware/auth'); 
 
 router.post('/signup', password, userCtrl.signup);    //  inscription
 router.post('/login', password, userCtrl.login);  //  connexion
 router.get('/users/profil', userCtrl.getAllUser);  
-router.get('/:id', password, userCtrl.getUser); // test rdx 24/02/2022
-router.get('/profil/:id', password, userCtrl.getUser); // test rdx 24/02/2022
+router.get('/:id', password, userCtrl.getUser);  
+router.get('/profil/:id', password, userCtrl.getUser);  
 
 
 router.delete('/profil/:id', auth, userCtrl.deleteUser); // suppression 

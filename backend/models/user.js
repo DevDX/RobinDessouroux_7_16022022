@@ -59,7 +59,7 @@ module.exports = (sequelize, Sequelize) => {
         },
 
         // Column-7, is status active or not  
-        uDeleted:  // à vérifier si utile rdx
+        uDeleted:   
         { 
             type: Sequelize.BOOLEAN, 
             defaultValue: false 
@@ -74,7 +74,7 @@ module.exports = (sequelize, Sequelize) => {
 
     },
         // pour avoir le nom au singulier dans la DB
-        {freezeTableName: true }    // test rdx 23/02/2022
+        {freezeTableName: true }     
     );
   
 

@@ -1,11 +1,10 @@
-/* index.js selon https://www.bezkoder.com/node-js-express-sequelize-mysql/ */
 const dbConfig = require("../config/db.config.js");
 
 const Sequelize = require("sequelize");
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, // dbConfig.port à vérifier si utile ou pas rdx
+const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD,  
     {
         host: dbConfig.HOST,
-        //port: dbConfig.port,    // à vérifier rdx
+        //port: dbConfig.port,     
         dialect: dbConfig.dialect,
         //operatorsAliases: false,
 
@@ -32,9 +31,6 @@ db.post = require("./post.js")(sequelize, Sequelize);
 
 db.post.belongsTo(db.user);
 db.user.hasMany(db.post);  
-// début test 26/02/2022 rdx 
-//db.user.hasMany(db.post,{ onDelete: "CASCADE", hooks: true });  
-// fin test 26/02/2022 rdx
 
 db.message.belongsTo(db.post,{onDelete:"CASCADE"});
 db.post.hasMany(db.message);  

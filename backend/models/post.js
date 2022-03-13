@@ -36,7 +36,7 @@ module.exports = (sequelize, Sequelize) => {
             },
         
             // Column-4, owner
-            postOwner:                  // vérifier si  utile rdx  
+            postOwner:                  
             { 
                 type: Sequelize.STRING, 
                 allowNull:false,
@@ -51,7 +51,7 @@ module.exports = (sequelize, Sequelize) => {
         },
 
             // pour avoir le nom au singulier dans la DB
-            {freezeTableName: true }    // test rdx 23/02/2022
+            {freezeTableName: true }     
         
         
         );

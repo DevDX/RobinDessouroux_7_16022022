@@ -1,4 +1,3 @@
-/* app.js très inspiré du P6 mais sans connexion à mongoose à vérifier rdx  */
 const express = require('express');
 const path = require('path');
 
