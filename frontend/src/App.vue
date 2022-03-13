@@ -1,9 +1,10 @@
 <template>
-  <div class="container">
+  <div class="main-container">
     <nav>
       <ul>
         <li v-if="CurrentUser"><router-link  to="/">Accueil</router-link></li> 
         <li v-if="CurrentUser"><router-link to="/profil">Profile</router-link></li>
+        <li v-if="CurrentUser && CurrentUser.userData.uIsadmin == true"><router-link to="/adminboard">AdminBoard</router-link></li>
         <li v-if="CurrentUser"><router-link  to="/ajoutpost">AddPost</router-link></li>
         <li v-if="CurrentUser"><router-link  to="/post">AllPosts</router-link></li>
         <li v-if="!CurrentUser"><router-link  to="/connexion">Login</router-link></li>
@@ -52,7 +53,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-
+.main-container {
+  padding-bottom: 4rem;
+}
 * {
   text-decoration: none;
   list-style-type: none;

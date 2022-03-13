@@ -26,7 +26,7 @@ module.exports = (sequelize, Sequelize) => {
             // Column-2, content
             messageContent: 
             { 
-                type: Sequelize.STRING, 
+                type: Sequelize.TEXT, 
                 allowNull:false 
             },
         

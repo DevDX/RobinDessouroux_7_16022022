@@ -31,7 +31,7 @@ module.exports = (sequelize, Sequelize) => {
             // Column-3, content
             postContent: 
             { 
-                type: Sequelize.STRING, 
+                type: Sequelize.TEXT, 
                 allowNull:false 
             },
         

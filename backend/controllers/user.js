@@ -47,7 +47,7 @@ exports.signup = (req, res, next) => {
     })
       
 // const { value, error } = schema.validate(req.body);
-if(schema.validate(req.body).error){ res.send(schema.validate(req.body).error.details); }
+if(schema.validate(req.body).error){return res.status(500).json(schema.validate(req.body).error.details); }
 else {
       //console.log(value);
       //res.send("email ok selon stackoverflow");
@@ -214,3 +214,16 @@ exports.modifyUser = (req, res, next) => {
   
 // fin modification données utilisateur
 
+exports.getAllUser = (req, res) => {
+    console.log("test");
+    User
+      .findAll()
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message: err.message || "Some error occurred while retrieving users.",
+        });
+      });
+  };

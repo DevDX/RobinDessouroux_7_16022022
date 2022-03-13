@@ -12,11 +12,10 @@ exports.createMessage  = (req, res, next) => {
       messageOwner : req.body.messageOwner, // userid ou req.body.messageOwner à vérifier rdx
       //messageOwner : "",
       //messageImageUrl :   `${req.protocol}://${req.get('host')}/images/${req.file.filename}`  //  à vérifier rdx
-      postId : req.body.postId
-      
+      postId : req.body.postId      
     })
     .then(() => res.status(201).json({message: 'Message sequelize enregistré !'})) 
-    .catch(error => res.status(400).json({ error: "erreur en ligne 21 controllers/message.js" })); 
+    .catch(error => res.status(400).json( error )); 
   // sequelize sequelize fin   
 };
   

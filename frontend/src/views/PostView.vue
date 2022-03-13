@@ -45,7 +45,7 @@ export default
   name: "AllPosts",
   data() 
   {
-    return {  posts: [], activecomment: 0, commentcontent: "" , currentcomment: 0}; //La liste d'articles est dans un tableau contenant plusieurs objets post        
+    return {  posts: [], activecomment: 0, commentcontent: null , currentcomment: 0};       
   },
   computed: {
     CurrentUser() {
@@ -64,6 +64,9 @@ export default
       })
     },
     createcomment(id) {
+      if (this.commentcontent == "\n"){
+        this.commentcontent = null
+      }
       let data = {
       messageContent: this.commentcontent,
       messageOwner: this.CurrentUser.userData.uName,
@@ -77,7 +80,9 @@ export default
         this.commentcontent="";
       })
       .catch((error) => {
-        console.log(error);
+        if (error.response.data.errors){
+          alert(error.response.data.errors[0].message)
+        }
       })
     } ,
     deletePost(id)

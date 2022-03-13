@@ -23,6 +23,11 @@ const routes = [
     name: 'Profile',
     component: () => import('../views/ProfileView.vue')
   },
+  { // le board administrateur
+    path: '/adminboard',
+    name: 'Adminboard',
+    component: () => import('../views/AdminBoardView.vue')
+  },
   { // tous les articles
     //path: '/articles',
     path: '/post',

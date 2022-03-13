@@ -30,8 +30,8 @@ export default {
   data() {
     return {
       post: {
-        title: "",
-        content: ""    
+        title: null,
+        content: null    
       },
       submitted: false
     };
@@ -62,7 +62,8 @@ export default {
           this.$router.push("/post");
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error.response);
+          alert(error.response.data.error.errors[0].message);
        });
     },
 

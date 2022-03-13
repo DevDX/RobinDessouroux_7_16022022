@@ -47,7 +47,7 @@ export default
     // Récupération de data grâce aux v-model 
     data() 
     {
-        return {email: "",password: "", nom: "", prenom: "", isadmin: false};
+        return {email: null ,password: null, nom: null, prenom: null, isadmin: false};
     },
     // utilisation d'axios pour envoi des données 
     methods: 
@@ -66,7 +66,16 @@ export default
             .then(() => {
              this.$router.push("/connexion")
             }, (error)=> {
-                console.log(error);
+                if (error.response.data[0]){
+                    alert(error.response.data[0].message)
+                }
+                else{
+                   if(error.response.data.error.errors){
+                       alert(error.response.data.error.errors[0].message)
+                   }else{
+                       alert(error.response.data.error)
+                   }
+                }
             })
         },
     },

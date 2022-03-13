@@ -47,7 +47,7 @@ export default
             .then(()=> {
                 this.$router.push("/profil")
             }, (error) => {
-                console.log(error);
+                alert(error.response.data.error);
             })  
         },
     },
