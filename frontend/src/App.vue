@@ -123,7 +123,6 @@ font-weight: bold;
   color: #ffffff; transition: all .3s ease-in-out;
 }
 
-/*@media screen and (max-width: 376px)*/
 @media screen and (max-width: 535px)
 {
   ul
