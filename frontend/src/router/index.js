@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router' // à vérifier avec Denis
-//import HomeView from '../views/HomeView.vue' // à vérifier avec Denis plutôt AccueilView.vue ?
+import { createRouter, createWebHistory } from 'vue-router'  
+//import HomeView from '../views/HomeView.vue' //   plutôt AccueilView.vue ?
 import AccueilView from '../views/AccueilView.vue' // ou nom indispensable Home ? Dans ce cas renommer.  
 
 const routes = [

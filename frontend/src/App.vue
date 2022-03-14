@@ -33,10 +33,10 @@ export default {
     }
   },
   methods: {
-  logout() {
-    this.$store.dispatch("auth/logout");
-    this.$router.push("/connexion"); // écran de login
-    }
+    logout() {
+      this.$store.dispatch("auth/logout");
+      this.$router.push("/connexion"); // écran de login
+      }
   },
   mounted() { // pour bloquer sur l'écran de connexion
     if (!this.CurrentUser) {

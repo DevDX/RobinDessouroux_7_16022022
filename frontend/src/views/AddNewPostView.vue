@@ -42,7 +42,7 @@ export default {
     }
   },
   methods: {
-    //Fonction qui permet la création d'un article tout en récupérant 
+    //Fonction qui permet la création d'un article  
     
     publishPost() {    
 
