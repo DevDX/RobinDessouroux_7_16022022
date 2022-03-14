@@ -34,7 +34,7 @@ const routes = [
     name: 'AllPosts',
     component: () => import('../views/PostView.vue')
   },
-  { // en cours... ajout d'un nouvel article et commentaire
+  { // ajout d'un nouvel article et commentaire
     path: '/ajoutpost',
     name: 'AddPost',
     component: () => import('../views/AddNewPostView.vue')
@@ -42,7 +42,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),  // à vérifier avec Denis 
+  history: createWebHistory(process.env.BASE_URL),   
   routes
 })
 

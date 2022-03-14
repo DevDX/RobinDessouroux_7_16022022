@@ -5,7 +5,7 @@
 
 ### Il faut exécuter depuis un terminal dans le dossier backend : npm install 
 
-### Puis les ajouter dépendances contenues dans le package.json :
+### Les dépendances suivantes ont été installées :
 ### {
 ###   "main": "app.js",
 ###   "dependencies": {
@@ -36,6 +36,9 @@ node server.js
 
 
 # FRONTEND
+
+### Dans le dossier Frontend, il faut saisir :
+npm install
 
 ### La partie frontend a besoin de "VueJS" et "Axios".
 

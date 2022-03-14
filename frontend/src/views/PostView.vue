@@ -20,7 +20,7 @@
                     </div>
                     <div class="msg-editor" v-if="this.activecomment == 1 && this.currentcomment == post.id">
                       <textarea class="content" v-model="this.commentcontent" @keyup.enter="createcomment(post.id)" @keyup.esc="this.activecomment=0" ></textarea> <!-- trigger sur enter -->
-                      <button class="button-delete" @click="createcomment(post.id)">New</button>
+                      <button @click="createcomment(post.id)">New</button>
                     </div>
                   </div>  
                   
