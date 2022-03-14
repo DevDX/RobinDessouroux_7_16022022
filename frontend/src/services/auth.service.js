@@ -23,7 +23,7 @@ class AuthService {
             uName: user.uName,
             uFirstname: user.uFirstname,
             uIsadmin: user.uIsadmin 
-        })  
+        })   
     }
 }
 

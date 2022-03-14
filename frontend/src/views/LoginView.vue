@@ -45,7 +45,7 @@ export default
             }
             this.$store.dispatch("auth/login",user)
             .then(()=> {
-                this.$router.push("/profil")
+                this.$router.push("/post")
             }, (error) => {
                 alert(error.response.data.error);
             })  

@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li v-if="CurrentUser"><router-link  to="/">Home</router-link></li> 
-        <li v-if="CurrentUser"><router-link to="/profil">Profile</router-link></li>
+        <li v-if="CurrentUser"><router-link to="/profil">{{ CurrentUser.userData.uName }}'s profile</router-link></li>
         <li v-if="CurrentUser && CurrentUser.userData.uIsadmin == true"><router-link to="/adminboard">AdminBoard</router-link></li>
         <li v-if="CurrentUser"><router-link  to="/ajoutpost">AddPost</router-link></li>
         <li v-if="CurrentUser"><router-link  to="/post">AllPosts</router-link></li>

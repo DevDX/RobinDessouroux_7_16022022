@@ -63,7 +63,7 @@ export default {
         })
         .catch((error) => {
           console.log(error.response);
-          alert(error.response.data.error.errors[0].message);
+          alert(error.response.data.error.errors[0].message.split(".post")[1]);
        });
     },
 

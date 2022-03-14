@@ -18,7 +18,10 @@
                       <button class="button-delete" v-if="CurrentUser.userData.id == post.userId || CurrentUser.userData.uIsadmin == true " @click="deletePost(post.id)">supprimer</button>
                       <button  @click="this.activecomment=1, this.currentcomment=post.id">commenter</button>
                     </div>
-                    <textarea class="content" v-model="this.commentcontent" @keyup.enter="createcomment(post.id)" @keyup.esc="this.activecomment=0" v-if="this.activecomment == 1 && this.currentcomment == post.id"></textarea> <!-- trigger sur enter -->
+                    <div class="msg-editor" v-if="this.activecomment == 1 && this.currentcomment == post.id">
+                      <textarea class="content" v-model="this.commentcontent" @keyup.enter="createcomment(post.id)" @keyup.esc="this.activecomment=0" ></textarea> <!-- trigger sur enter -->
+                      <button class="button-delete" @click="createcomment(post.id)">New</button>
+                    </div>
                   </div>  
                   
                   <div class="msg-container">
@@ -54,14 +57,18 @@ export default
   },
   methods: 
   {
-    deleteComment(id){
-      MessageRoutes.delete(id)
+    deleteComment(id){ 
+      if (confirm("Voulez-vous vraiment supprimer ce commentaire ?")) {
+       MessageRoutes.delete(id)
       .then(() => {
         this.retrievePosts()
       })
       .catch((error) => {
         console.log(error);
-      })
+      }) 
+      } else {
+        console.log("suppression annulée.");
+      }
     },
     createcomment(id) {
       if (this.commentcontent == "\n"){
@@ -186,6 +193,13 @@ h2
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.msg-editor
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 0.5rem;
 }
 #message
 {
