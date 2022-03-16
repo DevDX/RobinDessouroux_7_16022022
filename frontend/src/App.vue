@@ -16,6 +16,9 @@
       <img id="logo-groupomania-black" src="./images/icon-left-font-monochrome-black.png" alt="logo groupomania black" sizes="(min-width: 20px) 100px, 5vw"/>
     </header> 
     <router-view/>
+    <div id="img-container">
+      <img id="logo-groupomania-red" src="./images/icon-left-font.png" alt="logo groupomania red"  sizes="(min-width: 20px) 100px, 5vw"/>
+    </div>
   </div>
 </template>
 
@@ -72,19 +75,25 @@ header {
   display: flex;
   flex-direction:column;
   justify-content: center;
-  background-color: #ffb233;
+  background-color: #fd2d01;
   align-items: center;
 }
 
-#logo-groupomania-black 
-{
+#img-container {
+  margin: 0.125rem auto 0.5rem auto;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+}
+#logo-groupomania-black, #logo-groupomania-red {
   max-width: 170px;
-  height:170px;    
+  height: 170px;    
 } 
 
 h1 
 {
-    background-color: #ffb233;
+    background-color: #fd2d01;
     min-height: 5rem;
     width: 100%;
     display:flex;
@@ -110,7 +119,7 @@ ul a.router-link-exact-active {
 #logout{
 border: 1px solid #000000;
 border-radius: 5px;
-background-color: #ffb233;  
+background-color: #fd2d01;  
 padding: 1px 7px;
 color: #000000;
 font-weight: bold;

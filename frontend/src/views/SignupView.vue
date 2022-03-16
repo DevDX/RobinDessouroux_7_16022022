@@ -100,7 +100,7 @@ fieldset
 .group-button
 {
     font-weight: bold;
-    background-color: #ffb233;  
+    background-color: #fd2d01;  
     height:55px; width: 150px;
     border-radius: 10px;
     border: 1px solid #000000;
@@ -115,7 +115,7 @@ fieldset
 }
 legend
 {
-    background-color: #ffb233;
+    background-color: #fd2d01;
     color: #000000;
     border-radius: 5px;      
 }

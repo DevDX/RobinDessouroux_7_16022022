@@ -4,11 +4,11 @@
       <h1>Nouvelle Publication</h1>
       <article id="post-container">
         <div id="post">
-            <h2>Titre de votre publication</h2>
+            <h2><label for="title">Titre de votre publication</label></h2>
             
             <textarea name="title" type="text" required = "true" maxlength="20" v-model="post.title" id="title"></textarea>            
 
-            <h3>Saisissez le contenu de votre article</h3>
+            <h3><label for="content">Saisissez le contenu de votre article</label></h3>
             
             <textarea required = "true" type="text" id="content" v-model="post.content"  name="content">
             </textarea>
@@ -80,7 +80,7 @@ export default {
 <style scoped>
 h2
 {
-  background-color: #ffb233;
+  background-color: #fd2d01;
   border-radius: 10px;
   padding: 20px;  
   margin: 0;
@@ -88,7 +88,7 @@ h2
 }       
 h3
 {
-  background-color: #ffb233;
+  background-color: #fd2d01;
   border-radius: 10px;
   padding: 20px; 
   margin: 0;
@@ -114,15 +114,15 @@ textarea
   width: 100%;
   height: 5rem;
   border-radius: 5px;
-  background-color: rgb(243, 240, 214);
-  border: solid 1px yellow;
-  box-shadow: 0 0px 10px rgb(245, 225, 43);
+  background-color: #ffd7d7;
+  border: solid 1px #d1515a;
+  box-shadow: 0 0px 10px #d1515a;
 }
 #publish-post
 {
   border: 1px solid #000000;
   border-radius: 5px;
-  background-color: #ffb233;
+  background-color: #fd2d01;
   box-shadow: 0 0 4px black;
   font-weight: bold;  
   font-size:18px;

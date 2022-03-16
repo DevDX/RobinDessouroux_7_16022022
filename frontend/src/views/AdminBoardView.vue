@@ -95,7 +95,7 @@ export default
 .group-button
 {
     font-weight: bold;
-    background-color: #ffb233;  
+    background-color: #fd2d01;  
     height: 20px; 
     width: 50px;
     border-radius: 10px;

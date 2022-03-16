@@ -173,13 +173,13 @@ h2
 #post-content 
 {
   margin: 10px;
-  border: solid 1px yellow;
+  border: solid 1px #fd2d01;
   border-radius: 5px;
   overflow-wrap: break-word;
   width: 90%;
-  background-color: rgb(243, 240, 214);
+  background-color: rgb(247, 245, 245);
   /*border: outset yellow;*/
-  box-shadow: 0 0px 20px rgb(245, 225, 43);
+  box-shadow: 0 0px 20px #fd2d01;
 }
 .post-button
 {
@@ -205,10 +205,10 @@ h2
 {
   border-radius: 15px;
   border: 1px solid #000000;
-  border: inset rgb(26, 138, 59);
+  border: inset rgb(109, 13, 17);
   /*background-color: rgba(233, 231, 231, 0.219);*/
-  background-color: rgb(178, 245, 223);
-  box-shadow: 0 0 9px rgb(26, 138, 59);
+  background-color: #ffd7d7;
+  box-shadow: 0 0 9px rgb(145, 16, 23);
   padding: 4px;
   width: 90%;
   margin-bottom: 0.5rem; 
@@ -233,7 +233,7 @@ h2
 }
 button
 {
-  background-color: #ffb233;  
+  background-color: #fd2d01;  
   border-radius: 10px;
   border: 1px solid #000000;
   box-shadow: 0 0 4px black;

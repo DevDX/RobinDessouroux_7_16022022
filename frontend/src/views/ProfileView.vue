@@ -102,7 +102,7 @@ export default
 .group-button
 {
     font-weight: bold;
-    background-color: #ffb233;  
+    background-color: #fd2d01;  
     height:55px; 
     width: 150px;
     border-radius: 10px;
@@ -118,7 +118,7 @@ export default
 }
 legend
 {
-    background-color: #ffb233;
+    background-color: #fd2d01;
     border-radius: 5px; 
 }
 
